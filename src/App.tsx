@@ -1,12 +1,8 @@
 import './App.css';
-import InstallPWAButton from './components/installPWA/InstalPWA';
+// import InstallPWAButton from './components/installPWA/InstalPWA';
 
 function App() {
-	return (
-		<>
-			<InstallPWAButton />
-		</>
-	);
+	return <>{/* <InstallPWAButton /> */}</>;
 }
 
 export default App;

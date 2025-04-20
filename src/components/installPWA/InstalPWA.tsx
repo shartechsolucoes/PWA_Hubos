@@ -61,9 +61,9 @@ const InstallPWAButton: React.FC = () => {
 					</div>
 				</div>
 			)}
-			{isInstallable && (
+			{/* {isInstallable && (
 				<button onClick={() => setShowModal(true)}>Instalar App</button>
-			)}
+			)} */}
 		</>
 	);
 };
