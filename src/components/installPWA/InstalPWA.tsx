@@ -8,7 +8,8 @@ interface DeferredPromptEvent extends Event {
 }
 
 const InstallPWAButton: React.FC = () => {
-	const [isInstallable, setIsInstallable] = useState<boolean>(false);
+
+	// const [isInstallable, setIsInstallable] = useState<boolean>(false);
 	const [deferredPrompt, setDeferredPrompt] =
 		useState<DeferredPromptEvent | null>(null);
 	const [showModal, setShowModal] = useState<boolean>(false);
@@ -19,7 +20,7 @@ const InstallPWAButton: React.FC = () => {
 			const e = event as DeferredPromptEvent; // Tipo do evento
 			e.preventDefault();
 			setDeferredPrompt(e);
-			setIsInstallable(true);
+			// setIsInstallable(true);
 			setShowModal(true); // Exibe o modal quando o PWA pode ser instalado
 		};
 
@@ -55,7 +56,7 @@ const InstallPWAButton: React.FC = () => {
 				<div className="modal">
 					<div className="modal-content">
 						<h2>Instalar Aplicativo</h2>
-						<p>Deseja instalar o aplicativo para usar offline?</p>
+						<p>Deseja instalar o aplicativo?</p>
 						<button onClick={handleInstall}>Instalar</button>
 						<button onClick={handleCloseModal}>Fechar</button>
 					</div>

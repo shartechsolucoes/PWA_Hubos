@@ -1,0 +1,8 @@
+.sidebar{
+    position: fixed;
+}
+.avatar{
+    background: #050505;
+    background: linear-gradient(90deg,rgba(5, 5, 5, 1) 0%, rgba(67, 67, 67, 1) 74%);
+    padding:3px;
+}
