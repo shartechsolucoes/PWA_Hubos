@@ -1,8 +1,23 @@
 .sidebar{
     position: fixed;
+    padding: 10px;
+    top: 0;
+    width: 100%;
 }
+
 .avatar{
     background: #050505;
     background: linear-gradient(90deg,rgba(5, 5, 5, 1) 0%, rgba(67, 67, 67, 1) 74%);
     padding:3px;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+}
+.avatar img{
+    width: 30px;
+    height: 30px;
+}
+
+.dropdown-toggle::after{
+    display: none;
 }

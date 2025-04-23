@@ -1,6 +1,4 @@
 .navbar{
-    background: #050505;
-    background: linear-gradient(90deg,rgba(5, 5, 5, 1) 0%, rgba(67, 67, 67, 1) 74%);
     position: fixed;
     bottom: 0px;
     color: white;
@@ -13,4 +11,8 @@
     align-content: center;
     margin: 5%;
     overflow: auto;
+}
+
+.navbar .item{
+    font-size: 25px;
 }

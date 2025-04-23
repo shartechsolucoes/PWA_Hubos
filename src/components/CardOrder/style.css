@@ -1,0 +1,13 @@
+.card{
+    padding: 20px;
+}
+.card .title{
+    font-size: 10px;
+    font-weight: bold;
+    color: #8a8a8a;
+}
+.card .text{
+    font-size: 13px;
+    font-weight: bold;
+    color: #404040;
+}

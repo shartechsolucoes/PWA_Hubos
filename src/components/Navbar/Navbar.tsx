@@ -8,9 +8,9 @@ export default function Navbar() {
 		<>
 			<div className="navbar w-auto">
 				<div className="row">
-					<div className='col-4'><a href="../dashboard"><MdHome /></a></div>
-					<div className='col-4'><a href="../orders"><MdDocumentScanner/></a></div>
-					<div className='col-4'><a href="../user"><MdOutlineAccountCircle /></a></div>
+					<div className='col-4 item'><a href="../dashboard"><MdHome /></a></div>
+					<div className='col-4 item'><a href="../orders"><MdDocumentScanner/></a></div>
+					<div className='col-4 item'><a href="../user"><MdOutlineAccountCircle /></a></div>
 				</div>
 			</div>
 		</>

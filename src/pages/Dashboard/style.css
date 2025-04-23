@@ -1,11 +1,8 @@
+body{
+    background: #f8f8fa;
+}
 .maps{
     width: 100%;
     background: red;
     height: 200px;
-}
-.sidebar{
-    position: fixed;
-    background: white;
-    padding: 10px;
-    top: 0;
 }
