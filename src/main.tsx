@@ -9,6 +9,7 @@ import FormOrders from './pages/Orders/Form/index.tsx';
 import InfoOrders from './pages/Orders/Info/index.tsx';
 import ReportOrders from './pages/Orders/Report/index.tsx';
 import FormUser from './pages/User/Form/index.tsx';
+import InfoUser from "./pages/User/Info";
 
 createRoot(document.getElementById('root')!).render(
 	<BrowserRouter>
@@ -23,7 +24,8 @@ createRoot(document.getElementById('root')!).render(
 			<Route path="orders/form/:id" element={<FormOrders />} />
 			<Route path="orders/info/:id" element={<InfoOrders />} />
 			<Route path="orders/report" element={<ReportOrders />} />
-			<Route path="user" element={<FormUser />} />
+			<Route path="user/form" element={<FormUser />} />
+			<Route path="user/info" element={<InfoUser />} />
 
 			{/* </Route> */}
 		</Routes>

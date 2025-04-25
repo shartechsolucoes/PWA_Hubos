@@ -1,7 +1,7 @@
 import {useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css'
-import {FaArrowLeftLong} from "react-icons/fa6";
+import {IoIosArrowBack} from "react-icons/io";
 
 export default function Dashboard() {
 	const [toggleDropdown, setToggleDropdown] = useState(false);
@@ -9,7 +9,7 @@ export default function Dashboard() {
 			<div className="sidebar">
 				<div className="row">
 					<div className="col-2">
-						<FaArrowLeftLong />
+						<IoIosArrowBack />
 					</div>
 					<div className="col-8 text-center">
 						<h2 className="mt-1">Dashboard</h2>

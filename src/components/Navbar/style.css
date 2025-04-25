@@ -1,18 +1,20 @@
 .navbar{
-    position: fixed;
-    bottom: 0px;
-    color: white;
-    border-radius: 10px;
-    margin: auto;
-    padding: 10px;
-    align-content: center;
-    text-align: center;
-    width: 90% !important;
-    align-content: center;
-    margin: 5%;
-    overflow: auto;
+    position:fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    margin:0 10px ;
+    border-radius: 10px ;
+    background: #07AAE8;
+    background: linear-gradient(90deg,rgba(7, 170, 232, 1) 0%, rgba(46, 83, 164, 1) 74%);
 }
 
 .navbar .item{
-    font-size: 25px;
+    color: #ffffff;
 }
+.navbar .item a{
+    color: #ffffff;
+    font-size:25px;
+}
+
+

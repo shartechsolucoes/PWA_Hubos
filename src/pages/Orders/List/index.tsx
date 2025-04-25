@@ -1,6 +1,6 @@
 import Sidebar from "../../../components/Sidebar/sidebar.tsx";
 import Navbar from "../../../components/Navbar/Navbar.tsx";
-import {MdAdd} from "react-icons/md";
+import {MdOutlineAdd} from "react-icons/md";
 import './styles.css';
 import CardOrder from "../../../components/CardOrder/CardOrder.tsx";
 
@@ -11,7 +11,8 @@ export default function ListOrders() {
 			<div className="container">
 				<div className="d-flex align-content-end">
 					<input placeholder="Pesquisar OS" className="form-control"/>
-					<a className="btn " href="orders/form"><MdAdd /></a>
+					<a className="btn btn-primary mx-2" href="orders/form"><MdOutlineAdd />
+					</a>
 				</div>
 				<CardOrder/>
 				<CardOrder/>

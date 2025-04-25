@@ -49,7 +49,7 @@ export default function Login() {
 				</div>
 
 				<div>
-					<p className="dev">Desenvolvido por <a href="https://www.shartech.com.br">Shartech</a></p>
+					<p className="dev">Desenvolvido por&nbsp;<a href="https://www.shartech.com.br">Shartech</a></p>
 				</div>
 			</form>
 		</div>

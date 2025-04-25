@@ -1,17 +1,25 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {MdDocumentScanner, MdHome, MdOutlineAccountCircle} from "react-icons/md";
+import {MdOutlineAccountCircle} from "react-icons/md";
 
 import "./style.css";
+import {IoMdAdd} from "react-icons/io";
+import {GoHome} from "react-icons/go";
 
 export default function Navbar() {
 	return (
 		<>
-			<div className="navbar w-auto">
-				<div className="row">
-					<div className='col-4 item'><a href="../dashboard"><MdHome /></a></div>
-					<div className='col-4 item'><a href="../orders"><MdDocumentScanner/></a></div>
-					<div className='col-4 item'><a href="../user"><MdOutlineAccountCircle /></a></div>
-					<div className='col-4 item'><a href="../">login</a></div>
+
+			<div className="container m-0 ">
+				<div className="navbar d-block">
+					<div className="row ">
+						<div className='col-4 item text-center'><a href="../dashboard"><GoHome /></a></div>
+						<div className='col-4 item text-center'>
+						<div className='add'>
+							<a href="../orders"><IoMdAdd /></a>
+						</div>
+						</div>
+						<div className='col-4 item text-center'><a href="../user/info"><MdOutlineAccountCircle /></a></div>
+					</div>
 				</div>
 			</div>
 		</>

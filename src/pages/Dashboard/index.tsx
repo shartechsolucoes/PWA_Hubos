@@ -10,10 +10,10 @@ export default function Dashboard() {
 			<Sidebar/>
 			<div className="container">
 			<div className="row">
+
 				<div className="col-12 mt-3">
 					<h1 className='color-primary'>Bem Vindo</h1>
-					<h2>Edson Rodrigues asdasdasdas</h2>
-					<p>Desenvolvido por</p>
+					<h2>Edson Rodrigues</h2>
 				</div>
 
 				<div className="col-12 mt-3">

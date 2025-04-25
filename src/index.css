@@ -4,7 +4,11 @@ body {
 }
 
 .color-primary{
-  color: #2e715b !important;
+  color: #2e52a3 !important;
+}
+
+.btn-primary{
+  background: #2e52a3 !important;
 }
 
 /*.form-control{*/
@@ -45,4 +49,49 @@ h1{
 
 h2{
   font-size: 15px!important;
+}
+
+.input-group{
+  background: white !important;
+  border-radius: 10px !important;
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+}
+input.form-control{
+  background: white !important;
+  font-size: 15px !important;
+  border: none;
+  border-radius: 10px !important;
+}
+
+input.form-control:focus{
+  background: white !important;
+  border-radius: 10px !important;
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+}
+
+input.form-control{
+  background: white !important;
+}
+
+.input-group-text{
+  border: none !important;
+  padding: .80rem .75rem !important;
+  font-size: 14px !important;
+  background: white !important;
+  /*color:#2b58a9 !important;*/
+}
+
+a.btn-primary{
+  background: #07AAE8;
+  background: linear-gradient(90deg,rgba(7, 170, 232, 1) 0%, rgba(46, 83, 164, 1) 74%);
+  border-radius: 10px !important;
+  border:none;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-size: 13px !important;
+  padding:8px;
 }

@@ -6,9 +6,10 @@ export default function CardOrder() {
 		<>
 			<div className="card mt-2">
 				<div className="row">
+
 					<div className="col-8">
 						<p className='title'>OS</p>
-						<p className='text color-primary'>10023</p>
+						<p className='text color-primary'><a href="orders/report">10023</a></p>
 					</div>
 					<div className="col-4">
 						<p className='title'>Data</p>
@@ -18,7 +19,6 @@ export default function CardOrder() {
 						<p className='title'>Endereço</p>
 						<p className='text'>Rua Arnaldo Gusi 44, Xaxim Curitiba/PR</p>
 					</div>
-
 				</div>
 			</div>
 		</>

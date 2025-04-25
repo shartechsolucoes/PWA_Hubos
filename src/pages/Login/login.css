@@ -1,7 +1,5 @@
 @charset "UTF-8";
 .login{
-    background: #07AAE8;
-    background: linear-gradient(90deg,rgba(7, 170, 232, 1) 0%, rgba(46, 83, 164, 1) 74%);
     background: #f3f3f3;
     padding: 40px;
     min-height: 100vh;
@@ -10,6 +8,7 @@
     /*background: linear-gradient(-45deg, #1d418f, #570380, #102fb6, #003f8f);*/
     background-size: 400% 400%;
     animation: Gradient 15s ease infinite;
+    display:block;
 }
 
 /*@keyframes Gradient {*/

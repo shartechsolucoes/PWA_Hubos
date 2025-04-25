@@ -14,18 +14,18 @@ export default defineConfig({
 				type: 'module',
 			},
 			manifest: {
-				name: 'Hubos',
-				short_name: 'Hubos',
+				name: 'GeoOS',
+				short_name: 'GeoOS',
 				description: 'PWA for Hubos application, to installs in the smartphone',
 				theme_color: '#ffffff',
 				icons: [
 					{
-						src: 'vite.svg',
+						src: 'logo_new.png',
 						sizes: '192x192',
 						type: 'image/svg+xml',
 					},
 					{
-						src: 'vite.svg',
+						src: 'logo_new.png',
 						sizes: '512x512',
 						type: 'image/svg+xml',
 					},
