@@ -7,13 +7,22 @@ body {
   color: #2e715b !important;
 }
 
-.form-control{
-  border: 0px !important;
-  background: #dfdede !important;
-  font-size: 12px !important;
-  line-height: 12px !important;
-  height: 35px;
+/*.form-control{*/
+/*  border: 0px !important;*/
+/*  background: #dfdede !important;*/
+/*  font-size: 12px !important;*/
+/*  line-height: 12px !important;*/
+/*  height: 35px;*/
+/*}*/
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  font-size:12px !important;
 }
+
 .container{
   margin-top: 50px;
 }

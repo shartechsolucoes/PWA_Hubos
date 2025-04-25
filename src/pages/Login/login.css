@@ -1,0 +1,111 @@
+@charset "UTF-8";
+.login{
+    background: #07AAE8;
+    background: linear-gradient(90deg,rgba(7, 170, 232, 1) 0%, rgba(46, 83, 164, 1) 74%);
+    background: #f3f3f3;
+    padding: 40px;
+    min-height: 100vh;
+    width: 100vw;
+    height: 100vh;
+    /*background: linear-gradient(-45deg, #1d418f, #570380, #102fb6, #003f8f);*/
+    background-size: 400% 400%;
+    animation: Gradient 15s ease infinite;
+}
+
+/*@keyframes Gradient {*/
+/*    0% {*/
+/*        background-position: 0% 50%*/
+/*    }*/
+/*    50% {*/
+/*        background-position: 100% 50%*/
+/*    }*/
+/*    100% {*/
+/*        background-position: 0% 50%*/
+/*    }*/
+/*}*/
+
+
+.msg-error{
+    margin-top: 5px;
+    margin-bottom: 20px;
+    color: #9797fd;
+}
+
+.login .logo{
+    width:40%;
+    margin-top:80px !important;
+}
+
+
+h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 2em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    color: #fff;
+    font-family: 'Lato';
+    border: 1px solid #fff;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+}
+
+.login .input-group{
+    background: white !important;
+    border-radius: 10px !important;
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+}
+.login .input-group input{
+    background: white !important;
+    font-size: 12px !important;
+    border: none;
+    border-radius: 10px !important;
+}
+
+.login .input-group input:focus{
+    background: white !important;
+    border-radius: 10px !important;
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+}
+
+.login .form-control{
+    background: white !important;
+}
+
+.input-group-text{
+    border: none !important;
+    padding: .80rem .75rem !important;
+    font-size: 13px !important;
+    background: white !important;
+    /*color:#2b58a9 !important;*/
+}
+
+.login a.btn-primary{
+    background: #07AAE8;
+    background: linear-gradient(90deg,rgba(7, 170, 232, 1) 0%, rgba(46, 83, 164, 1) 74%);
+    border-radius: 10px !important;
+    border:none;
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-size: 13px !important;
+    padding:8px;
+}
+
+.dev{
+    font-size:10px;
+    float:right;
+    color: #636363;
+}
+
+.dev a{
+    font-size:10px;
+    float:right;
+    text-decoration: none;
+    color: #14a6f1;
+}

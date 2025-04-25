@@ -5,17 +5,13 @@
     width: 100%;
 }
 
-.avatar{
+.avatar img{
     background: #050505;
     background: linear-gradient(90deg,rgba(5, 5, 5, 1) 0%, rgba(67, 67, 67, 1) 74%);
-    padding:3px;
     border-radius: 50%;
-    width: 35px;
-    height: 35px;
-}
-.avatar img{
     width: 30px;
     height: 30px;
+    border: 2px solid #2e725f
 }
 
 .dropdown-toggle::after{

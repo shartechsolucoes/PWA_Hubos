@@ -12,7 +12,8 @@ export default function Dashboard() {
 			<div className="row">
 				<div className="col-12 mt-3">
 					<h1 className='color-primary'>Bem Vindo</h1>
-					<h2>Edson Rodrigues</h2>
+					<h2>Edson Rodrigues asdasdasdas</h2>
+					<p>Desenvolvido por</p>
 				</div>
 
 				<div className="col-12 mt-3">
@@ -24,6 +25,9 @@ export default function Dashboard() {
 				</div>
 
 			</div>
+			</div>
+			<div>
+
 			</div>
 			<Navbar/>
 		</>

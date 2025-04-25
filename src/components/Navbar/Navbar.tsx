@@ -11,6 +11,7 @@ export default function Navbar() {
 					<div className='col-4 item'><a href="../dashboard"><MdHome /></a></div>
 					<div className='col-4 item'><a href="../orders"><MdDocumentScanner/></a></div>
 					<div className='col-4 item'><a href="../user"><MdOutlineAccountCircle /></a></div>
+					<div className='col-4 item'><a href="../">login</a></div>
 				</div>
 			</div>
 		</>
