@@ -3,6 +3,7 @@
     padding: 10px;
     top: 0;
     width: 100%;
+
 }
 
 .avatar img{
@@ -11,7 +12,6 @@
     border-radius: 50%;
     width: 30px;
     height: 30px;
-    border: 2px solid #2e725f
 }
 
 .dropdown-toggle::after{

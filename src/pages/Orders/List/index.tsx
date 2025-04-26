@@ -16,6 +16,11 @@ export default function ListOrders() {
 				</div>
 				<CardOrder/>
 				<CardOrder/>
+				<CardOrder/>
+				<CardOrder/>
+				<CardOrder/>
+				<CardOrder/>
+				<CardOrder/>
 			</div>
 			<Navbar/>
 		</>

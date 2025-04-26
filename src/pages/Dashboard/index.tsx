@@ -22,6 +22,7 @@ export default function Dashboard() {
 				<div className="col-12 mt-3">
 					<CardOrder/>
 					<CardOrder/>
+					<CardOrder/>
 				</div>
 
 			</div>

@@ -29,6 +29,7 @@ input:-webkit-autofill:active{
 
 .container{
   margin-top: 50px;
+  padding: 0 20px!important;
 }
 .card{
   border: 0px!important;
@@ -41,6 +42,9 @@ p, h1, h2, h3{
   padding: 0 !important;
   margin: 0 !important;
   font-family: "Roboto", sans-serif;
+}
+p{
+  font-size: 14px;
 }
 
 h1{

@@ -36,8 +36,7 @@
 }
 
 
-h1 {
-    position: absolute;
+.login h1 {
     top: 50%;
     left: 50%;
     font-size: 2em;
@@ -96,13 +95,13 @@ h1 {
     padding:8px;
 }
 
-.dev{
+p.dev{
     font-size:10px;
     float:right;
     color: #636363;
 }
 
-.dev a{
+p.dev a{
     font-size:10px;
     float:right;
     text-decoration: none;

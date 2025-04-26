@@ -24,7 +24,7 @@ export default function Dashboard() {
 							className="avatar">
 							<img src='https://static.vecteezy.com/system/resources/thumbnails/027/951/137/small_2x/stylish-spectacles-guy-3d-avatar-character-illustrations-png.png'/>
 						</div>
-					</a>
+						</a>
 						<ul
 							className={`dropdown-menu dropdown-menu-end drop-menu ${
 								toggleDropdown && 'show'

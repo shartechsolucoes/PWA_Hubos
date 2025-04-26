@@ -1,0 +1,31 @@
+.qrcode{
+    font-size: 40px;
+    background: #eaeaea;
+    padding: 10px;
+    line-height: 60px;
+    margin-bottom: 30px;
+}
+.map{
+    background: #eaeaea;
+    margin: auto;
+    height: 150px;
+    border-radius: 10px;
+    background-image: url("https://guiamapa.com/mapas/cidades/rs/mapa-bom-principio.png");
+    background-size: cover;
+}
+
+.kitItem .kitQTD{
+    background: #226bb7;
+    text-align: center;
+    padding: 10px 15px;
+    color: white;
+    border-radius: 10px 0px 10px 0px ;
+}
+.kitItem .kitInfo p{
+    font-size: 12px;
+}
+.kitItem .kitInfo p.title{
+    color: #226bb7;
+    font-weight: bold;
+    font-size: 14px;
+}

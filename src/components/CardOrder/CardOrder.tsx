@@ -1,23 +1,18 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css'
+import {BsQrCodeScan} from "react-icons/bs";
 
 export default function CardOrder() {
 	return (
 		<>
-			<div className="card mt-2">
-				<div className="row">
-
-					<div className="col-8">
-						<p className='title'>OS</p>
-						<p className='text color-primary'><a href="orders/report">10023</a></p>
+			<div className="cardOrder mt-2">
+				<div className="d-flex kitItem gap-2">
+					<div className="qrcode">
+						<BsQrCodeScan />
 					</div>
-					<div className="col-4">
-						<p className='title'>Data</p>
-						<p className='text'>22 de Abril</p>
-					</div>
-					<div className="col-12 mt-1">
-						<p className='title'>Endereço</p>
-						<p className='text'>Rua Arnaldo Gusi 44, Xaxim Curitiba/PR</p>
+					<div className="info">
+						<p className="title"><a href="orders/info">KIT 60W</a></p>
+						<p>Rua Arnaldo Gusi 44, Xaxim Curitiba/PR</p>
 					</div>
 				</div>
 			</div>
