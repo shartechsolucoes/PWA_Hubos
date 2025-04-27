@@ -33,6 +33,9 @@ export default function Login() {
 			localStorage.setItem('accessLevel', access_level);
 			localStorage.setItem('userName', userName);
 			localStorage.setItem('userId', userId);
+			if (response.data.picture) {
+				localStorage.setItem('userAvatar', response.data.picture);
+			}
 
 			// Redireciona para dashboard
 			navigate('/dashboard');

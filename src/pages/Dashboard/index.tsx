@@ -39,10 +39,29 @@ export default function Dashboard() {
 		setOrders(response.data.orders);
 	};
 
+	const [isReady, setIsReady] = useState(false);
+
 	useEffect(() => {
-		getOrders();
-		setUserName(localStorage.getItem('userName') || '');
+		const interval = setInterval(() => {
+			const userId = localStorage.getItem('userId');
+			const token = localStorage.getItem('token');
+
+			if (userId && token) {
+				setIsReady(true);
+				clearInterval(interval);
+			}
+		}, 100); // checa a cada 100ms
+
+		return () => clearInterval(interval);
 	}, []);
+
+	useEffect(() => {
+		if (isReady) {
+			getOrders();
+			setUserName(localStorage.getItem('userName') || '');
+		}
+	}, [isReady]);
+
 	return (
 		<>
 			<Sidebar />
@@ -61,21 +80,20 @@ export default function Dashboard() {
 					</div>
 					<div className="col-12 mt-3">
 						{orders.map((order) => (
-							<>
-								<CardOrder
-									id={order.id}
-									address={
-										order.address +
-										' ' +
-										order.neighborhood +
-										' ' +
-										order.city +
-										' ' +
-										order.state
-									}
-									order={order.qr_code}
-								/>
-							</>
+							<CardOrder
+								key={order.id}
+								id={order.id}
+								address={
+									order.address +
+									' ' +
+									order.neighborhood +
+									' ' +
+									order.city +
+									' ' +
+									order.state
+								}
+								order={order.qr_code}
+							/>
 						))}
 					</div>
 				</div>
