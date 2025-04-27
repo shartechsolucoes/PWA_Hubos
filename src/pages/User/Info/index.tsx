@@ -16,6 +16,7 @@ export default function InfoUser() {
 		city: '',
 		neighborhood: '',
 		state: '',
+		picture: '',
 	});
 
 	const getUser = async () => {
@@ -35,7 +36,7 @@ export default function InfoUser() {
 			<div className="container mt-5">
 				<div className="info d-block text-center">
 					<div className="avatar_user align-content-center">
-						<img src="https://static.vecteezy.com/system/resources/thumbnails/027/951/137/small_2x/stylish-spectacles-guy-3d-avatar-character-illustrations-png.png" />
+						<img src={`${import.meta.env.VITE_API_URL}${user.picture}`} />
 						<div className="edit">
 							<a href="/User/Form" className="">
 								<BsFillPencilFill />
