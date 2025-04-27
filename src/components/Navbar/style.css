@@ -1,10 +1,11 @@
 .navbar{
     position:fixed;
-    bottom: 20px;
+    bottom: 0px;
     left: 0;
     right: 0;
-    margin:0 10px ;
-    border-radius: 10px ;
+    margin:0 0px ;
+    padding: 15px 10px;
+    border-radius: 20px 20px 0 0;
     background: #07AAE8;
     background: linear-gradient(90deg,rgba(7, 170, 232, 1) 0%, rgba(46, 83, 164, 1) 74%);
 }
@@ -14,7 +15,8 @@
 }
 .navbar .item a{
     color: #ffffff;
-    font-size:25px;
+    font-size:20px;
+    line-height: 0;
 }
 
 
