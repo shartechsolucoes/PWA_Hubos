@@ -28,6 +28,7 @@ export default function Dashboard() {
 	>([]);
 
 	const [userName, setUserName] = useState('');
+	const [isReady, setIsReady] = useState(false);
 
 	const getOrders = async () => {
 		const userId = localStorage.getItem('userId');
@@ -38,8 +39,6 @@ export default function Dashboard() {
 		);
 		setOrders(response.data.orders);
 	};
-
-	const [isReady, setIsReady] = useState(false);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
