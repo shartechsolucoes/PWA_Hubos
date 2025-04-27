@@ -1,21 +1,34 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './style.css'
-import {BsQrCodeScan} from "react-icons/bs";
+import './style.css';
+import { BsQrCodeScan } from 'react-icons/bs';
+import { Link } from 'react-router';
 
-export default function CardOrder() {
+export default function CardOrder({
+	order,
+	address,
+	id,
+}: {
+	order: string;
+	address: string;
+	id: number;
+}) {
 	return (
 		<>
-			<div className="cardOrder mt-2">
-				<div className="d-flex kitItem gap-2">
-					<div className="qrcode">
-						<BsQrCodeScan />
-					</div>
-					<div className="info">
-						<p className="title"><a href="orders/info">KIT 60W</a></p>
-						<p>Rua Arnaldo Gusi 44, Xaxim Curitiba/PR</p>
+			<Link to={'/orders/info?id=' + id} className="link-no-style">
+				<div className="cardOrder mt-2">
+					<div className="d-flex kitItem gap-2">
+						<div className="qrcode">
+							<BsQrCodeScan />
+						</div>
+						<div className="info">
+							<p className="title">
+								<span>{order}</span>
+							</p>
+							<p>{address}</p>
+						</div>
 					</div>
 				</div>
-			</div>
+			</Link>
 		</>
 	);
 }

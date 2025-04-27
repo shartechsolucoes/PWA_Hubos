@@ -1,8 +1,14 @@
-body{
+body {
     background: #f8f8fa;
 }
-.maps{
+
+.maps {
     width: 100%;
     background: red;
     height: 200px;
+}
+
+
+.view {
+    margin-bottom: 4em;
 }

@@ -1,19 +1,20 @@
-.sidebar{
+.sidebar {
     position: fixed;
     padding: 10px;
     top: 0;
     width: 100%;
+    background-color: #f8f8fa;
 
 }
 
-.avatar img{
+.avatar img {
     background: #050505;
-    background: linear-gradient(90deg,rgba(5, 5, 5, 1) 0%, rgba(67, 67, 67, 1) 74%);
+    background: linear-gradient(90deg, rgba(5, 5, 5, 1) 0%, rgba(67, 67, 67, 1) 74%);
     border-radius: 50%;
     width: 30px;
     height: 30px;
 }
 
-.dropdown-toggle::after{
+.dropdown-toggle::after {
     display: none;
 }
