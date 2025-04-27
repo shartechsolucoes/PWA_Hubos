@@ -9,25 +9,88 @@ import FormOrders from './pages/Orders/Form/index.tsx';
 import InfoOrders from './pages/Orders/Info/index.tsx';
 import ReportOrders from './pages/Orders/Report/index.tsx';
 import FormUser from './pages/User/Form/index.tsx';
-import InfoUser from "./pages/User/Info";
+import InfoUser from './pages/User/Info';
+import PublicRoute from './routes/PublicRoute.tsx';
+import PrivateRoute from './routes/PrivateRoute.tsx';
 
 createRoot(document.getElementById('root')!).render(
 	<BrowserRouter>
 		<Routes>
-			<Route index element={<Login />} />
-			{/* <Route path="about" element={<About />} /> */}
+			{/* ROTA PÚBLICA */}
+			<Route
+				index
+				element={
+					<PublicRoute>
+						<Login />
+					</PublicRoute>
+				}
+			/>
 
-			{/* <Route element={<AuthLayout />}> */}
-			<Route path="dashboard" element={<Dashboard />} />
-			<Route path="orders" element={<ListOrders />} />
-			<Route path="orders/form" element={<FormOrders />} />
-			<Route path="orders/form/:id" element={<FormOrders />} />
-			<Route path="orders/info/" element={<InfoOrders />} />
-			<Route path="orders/report" element={<ReportOrders />} />
-			<Route path="user/form" element={<FormUser />} />
-			<Route path="user/info" element={<InfoUser />} />
-
-			{/* </Route> */}
+			{/* ROTAS PRIVADAS */}
+			<Route
+				path="dashboard"
+				element={
+					<PrivateRoute>
+						<Dashboard />
+					</PrivateRoute>
+				}
+			/>
+			<Route
+				path="orders"
+				element={
+					<PrivateRoute>
+						<ListOrders />
+					</PrivateRoute>
+				}
+			/>
+			<Route
+				path="orders/form"
+				element={
+					<PrivateRoute>
+						<FormOrders />
+					</PrivateRoute>
+				}
+			/>
+			<Route
+				path="orders/form/:id"
+				element={
+					<PrivateRoute>
+						<FormOrders />
+					</PrivateRoute>
+				}
+			/>
+			<Route
+				path="orders/info/"
+				element={
+					<PrivateRoute>
+						<InfoOrders />
+					</PrivateRoute>
+				}
+			/>
+			<Route
+				path="orders/report"
+				element={
+					<PrivateRoute>
+						<ReportOrders />
+					</PrivateRoute>
+				}
+			/>
+			<Route
+				path="user/form"
+				element={
+					<PrivateRoute>
+						<FormUser />
+					</PrivateRoute>
+				}
+			/>
+			<Route
+				path="user/info"
+				element={
+					<PrivateRoute>
+						<InfoUser />
+					</PrivateRoute>
+				}
+			/>
 		</Routes>
 		<InstallPWAButton />
 	</BrowserRouter>
