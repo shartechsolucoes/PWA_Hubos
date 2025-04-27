@@ -1,13 +1,12 @@
-
 body {
   margin: 0;
 }
 
-.color-primary{
+.color-primary {
   color: #2e52a3 !important;
 }
 
-.btn-primary{
+.btn-primary {
   background: #2e52a3 !important;
 }
 
@@ -22,59 +21,65 @@ body {
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
-input:-webkit-autofill:active{
+input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
-  font-size:12px !important;
+  font-size: 12px !important;
 }
 
-.dropdown-menu{
+.dropdown-menu {
   right: 10px;
 }
 
-.container{
+.container {
   margin-top: 50px;
-  padding: 0 20px!important;
+  padding: 0 20px !important;
 }
 
-.card{
-  border: 0px!important;
+.card {
+  border: 0px !important;
 }
 
-.img-fluid{
+.img-fluid {
   width: 100%;
 }
-p, h1, h2, h3{
+
+p,
+h1,
+h2,
+h3 {
   padding: 0 !important;
   margin: 0 !important;
   font-family: "Roboto", sans-serif;
 }
-p{
+
+p {
   font-size: 14px;
 }
 
-h1{
-  font-size: 20px!important;
+h1 {
+  font-size: 20px !important;
 }
 
-h2{
-  font-size: 15px!important;
+h2 {
+  font-size: 15px !important;
 }
 
-.input-group{
+.input-group {
   background: white !important;
   border-radius: 10px !important;
   box-shadow: 0 0 0 0;
   border: 0 none;
   outline: 0;
 }
-input.form-control{
+
+input.form-control {
   background: white !important;
   font-size: 15px !important;
   border: none;
   border-radius: 10px !important;
 }
 
-input.form-control:focus{
+input.form-control:focus {
   background: white !important;
   border-radius: 10px !important;
   box-shadow: 0 0 0 0;
@@ -82,11 +87,11 @@ input.form-control:focus{
   outline: 0;
 }
 
-input.form-control{
+input.form-control {
   background: white !important;
 }
 
-.input-group-text{
+.input-group-text {
   border: none !important;
   padding: .80rem .75rem !important;
   font-size: 14px !important;
@@ -94,13 +99,20 @@ input.form-control{
   /*color:#2b58a9 !important;*/
 }
 
-a.btn-primary{
+a.btn-primary {
   background: #07AAE8;
-  background: linear-gradient(90deg,rgba(7, 170, 232, 1) 0%, rgba(46, 83, 164, 1) 74%);
+  background: linear-gradient(90deg, rgba(7, 170, 232, 1) 0%, rgba(46, 83, 164, 1) 74%);
   border-radius: 10px !important;
-  border:none;
+  border: none;
   font-weight: 400;
   letter-spacing: 1px;
   font-size: 13px !important;
-  padding:8px;
+  padding: 8px;
+}
+
+
+.box-shadow {
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2),
+    0px 1px 2px rgba(0, 0, 0, 0.14),
+    0px 1px 1px rgba(0, 0, 0, 0.12);
 }

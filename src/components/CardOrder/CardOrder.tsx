@@ -15,7 +15,7 @@ export default function CardOrder({
 	return (
 		<>
 			<Link to={'/orders/info?id=' + id} className="link-no-style">
-				<div className="cardOrder mt-2">
+				<div className="cardOrder mt-2 box-shadow">
 					<div className="d-flex kitItem gap-2">
 						<div className="qrcode">
 							<BsQrCodeScan />
