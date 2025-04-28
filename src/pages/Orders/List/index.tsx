@@ -63,7 +63,7 @@ export default function ListOrders() {
 	return (
 		<>
 			<Sidebar />
-			<div className="container">
+			<div className="container view">
 				<div className="d-flex align-content-end">
 					<input
 						placeholder="Pesquisar OS"

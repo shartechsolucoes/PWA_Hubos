@@ -17,6 +17,7 @@
     display: flex;
     margin-bottom: 0px;
     border-radius: 5px;
+    max-height: 40px;
 }
 
 .cardOrder .info p {
