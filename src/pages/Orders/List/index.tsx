@@ -33,10 +33,9 @@ export default function ListOrders() {
 
 	const getOrders = async () => {
 		const userId = localStorage.getItem('userId');
-		const today = new Date();
-		const formattedDate = format(today, 'yyyy-MM-dd');
+
 		const response = await api.get(
-			`/orders?dateStart=${formattedDate}&dateEnd=${formattedDate}&userId=${userId}&os=${searchTerm}`
+			`/orders?dateStart=&userId=${userId}&os=${searchTerm}`
 		);
 		setOrders(response.data.orders);
 	};
