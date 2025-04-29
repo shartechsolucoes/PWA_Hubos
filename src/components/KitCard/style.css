@@ -1,0 +1,39 @@
+.cardKit {
+  background: white;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+
+.cardKit .kitQTD {
+  background: #226bb7;
+  text-align: center;
+  font-size: 20px;
+  padding: 10px;
+  color: white;
+  display: flex;
+  margin-bottom: 0px;
+  border-radius: 5px;
+  max-height: 40px;
+  width: 40px;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.cardKit .info p {
+  font-size: 12px;
+}
+
+.cardKit .info p.title {
+  color: #226bb7;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.cardKit .info p span {
+  text-decoration: none;
+  color: #226bb7;
+  font-weight: bold;
+  font-size: 14px;
+}
