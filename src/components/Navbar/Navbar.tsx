@@ -1,8 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {IoIosLogOut, IoMdAdd} from "react-icons/io";
-import {GoHome} from "react-icons/go";
-import {CiCircleList, CiUser} from "react-icons/ci";
-import "./style.css";
+import { IoIosLogOut, IoMdAdd } from 'react-icons/io';
+import { GoHome } from 'react-icons/go';
+import { CiCircleList, CiUser } from 'react-icons/ci';
+import './style.css';
+import { Link } from 'react-router';
 
 export default function Navbar() {
 	return (
@@ -10,22 +11,32 @@ export default function Navbar() {
 			<div className="container m-0 ">
 				<div className="navbar d-block">
 					<div className="row ">
-						<div className='w-25 item text-center'>
-							<a href="../dashboard"><GoHome /></a>
+						<div className="w-25 item text-center">
+							<Link to="/dashboard">
+								<GoHome />
+							</Link>
 						</div>
-						<div className='col-2 item text-center'>
-							<a href="../orders"><CiCircleList /></a>
+						<div className="col-2 item text-center">
+							<Link to="/orders">
+								<CiCircleList />
+							</Link>
 						</div>
-						<div className='col-2 item text-center'>
-						<div className='add'>
-							<a href="../orders/form"><IoMdAdd /></a>
+						<div className="col-2 item text-center">
+							<div className="add">
+								<Link to="/orders/form">
+									<IoMdAdd />
+								</Link>
+							</div>
 						</div>
+						<div className="col-2 item text-center">
+							<Link to="/user/info">
+								<CiUser />
+							</Link>
 						</div>
-						<div className='col-2 item text-center'>
-							<a href="../user/info"><CiUser /></a>
-						</div>
-						<div className='col-3 item text-center'>
-							<a href="../"><IoIosLogOut /> </a>
+						<div className="col-3 item text-center">
+							<Link to="/">
+								<IoIosLogOut />{' '}
+							</Link>
 						</div>
 					</div>
 				</div>

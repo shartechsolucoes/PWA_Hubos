@@ -81,7 +81,6 @@ export default function InfoOrders() {
 	}, []);
 	return (
 		<>
-			<Sidebar />
 			<div className="container">
 				<div className="row d-flex flex-column gap-1">
 					<div className="d-flex gap-3">
@@ -134,7 +133,6 @@ export default function InfoOrders() {
 					</div>
 				</div>
 			</div>
-			<Navbar />
 		</>
 	);
 }

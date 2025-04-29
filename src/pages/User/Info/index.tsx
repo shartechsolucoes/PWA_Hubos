@@ -1,11 +1,10 @@
-import Sidebar from '../../../components/Sidebar/sidebar.tsx';
-import Navbar from '../../../components/Navbar/Navbar.tsx';
 import './style.css';
 import { BsFillPencilFill, BsPinMap } from 'react-icons/bs';
 import { IoPhonePortraitOutline } from 'react-icons/io5';
 import { CiMail } from 'react-icons/ci';
 import { useEffect, useState } from 'react';
 import { api } from '../../../utils/api.ts';
+import { Link } from 'react-router';
 
 export default function InfoUser() {
 	const [user, setUser] = useState({
@@ -32,15 +31,14 @@ export default function InfoUser() {
 
 	return (
 		<>
-			<Sidebar />
 			<div className="container mt-5">
 				<div className="info d-block text-center">
 					<div className="avatar_user align-content-center">
 						<img src={`${import.meta.env.VITE_API_URL}${user.picture}`} />
 						<div className="edit">
-							<a href="/User/Form" className="">
+							<Link to="/user/form">
 								<BsFillPencilFill />
-							</a>
+							</Link>
 						</div>
 					</div>
 
@@ -63,7 +61,6 @@ export default function InfoUser() {
 					</div>
 				</div>
 			</div>
-			<Navbar />
 		</>
 	);
 }

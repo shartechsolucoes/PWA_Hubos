@@ -7,6 +7,8 @@ import { IoPhonePortraitOutline } from 'react-icons/io5';
 import { useEffect, useState } from 'react';
 import { api } from '../../../utils/api.ts';
 import Toast from '../../../components/Toast/Toast.tsx';
+import { useNavigate } from 'react-router';
+import { getFirstLetter } from '../../../utils/getFirstLetter.ts';
 
 type User = {
 	id: string;
@@ -35,11 +37,13 @@ export default function FormUser() {
 		login: '',
 		access_level: 0,
 		expiration: 0,
-		picture: '',
+		picture: localStorage.getItem('userAvatar') ?? '',
 		email: '',
 		phone: '',
 		status: true,
 	});
+
+	const navigate = useNavigate();
 
 	const [showToast, setShowToast] = useState(false);
 	const [toastMessage, setToastMessage] = useState('');
@@ -99,7 +103,7 @@ export default function FormUser() {
 		setToastMessage('Dados salvos com sucesso!');
 		setToastType('success');
 		setShowToast(true);
-		// closeToast();
+		closeToast();
 	};
 
 	const handleError = () => {
@@ -112,23 +116,26 @@ export default function FormUser() {
 	const closeToast = () => {
 		setTimeout(() => {
 			setShowToast(false);
-		}, 2000);
+			if (toastType !== 'error') navigate('/user/info');
+		}, 1300);
 	};
 
 	return (
 		<>
-			<Sidebar />
-
 			<div className="container">
 				<div className="info d-block text-center">
 					<div className="avatar_user align-content-center">
-						<img
-							src={`${import.meta.env.VITE_API_URL}${user.picture}`}
-							alt="Avatar"
-						/>
+						{!user.picture ? (
+							getFirstLetter(user.name)
+						) : (
+							<img
+								src={`${import.meta.env.VITE_API_URL}${user.picture}`}
+								alt="Avatar"
+							/>
+						)}
 					</div>
 				</div>
-				<div className="mt-4">
+				<div className="mt-4 d-flex flex-column gap-2 align-items-center">
 					<form className="row" onSubmit={saveInfo}>
 						<div className="mb-2">
 							<div className="input-group mb-2">
@@ -181,16 +188,15 @@ export default function FormUser() {
 								</div>
 							</div>
 						</div>
-						<button type="submit" className="rounded btn btn-primary">
-							Salvar
-						</button>
+						<div className="mb-3 d-grid">
+							<button type="submit" className="rounded btn btn-primary">
+								Salvar
+							</button>
+						</div>
 					</form>
-					<div className="row p-2 position-relative">
-						<Toast type={toastType} message={toastMessage} show={showToast} />
-					</div>
+					<Toast type={toastType} message={toastMessage} show={showToast} />
 				</div>
 			</div>
-			<Navbar />
 		</>
 	);
 }

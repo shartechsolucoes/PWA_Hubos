@@ -1,22 +1,22 @@
 .toast-container {
   padding: 8px;
-
   border-radius: 5px;
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 95%;
+  width: 100%;
   z-index: 9999;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 
 .toast-container.success {
-  background-color: #28a745;
+  background-color: #64cc7d;
 }
 
 .toast-container.error {
-  background-color: #dc3545;
+  background-color: #ec707c;
 }
 
 .toast-container button {

@@ -63,7 +63,6 @@ export default function Dashboard() {
 
 	return (
 		<>
-			<Sidebar />
 			<div className="container view">
 				<div className="row">
 					<div className="col-12 mt-3">
@@ -98,7 +97,6 @@ export default function Dashboard() {
 				</div>
 			</div>
 			<div></div>
-			<Navbar />
 		</>
 	);
 }

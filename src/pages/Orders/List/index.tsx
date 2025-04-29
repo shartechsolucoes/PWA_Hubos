@@ -62,7 +62,6 @@ export default function ListOrders() {
 
 	return (
 		<>
-			<Sidebar />
 			<div className="container view">
 				<div className="d-flex align-content-end">
 					<input
@@ -95,7 +94,6 @@ export default function ListOrders() {
 					/>
 				))}
 			</div>
-			<Navbar />
 		</>
 	);
 }

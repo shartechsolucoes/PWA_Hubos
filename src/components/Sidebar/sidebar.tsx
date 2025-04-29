@@ -2,9 +2,12 @@ import { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 import { IoIosArrowBack } from 'react-icons/io';
+import { Link, useNavigate } from 'react-router';
+import { getFirstLetter } from '../../utils/getFirstLetter';
 
 export default function Dashboard() {
 	const [toggleDropdown, setToggleDropdown] = useState(false);
+	const navigate = useNavigate();
 
 	const [user, setUser] = useState({ name: '', avatar: '' });
 
@@ -17,9 +20,9 @@ export default function Dashboard() {
 	return (
 		<div className="sidebar">
 			<div className="row">
-				<div className="col-2">
+				<a onClick={() => navigate(-1)} className="col-2">
 					<IoIosArrowBack />
-				</div>
+				</a>
 				<div className="col-8 text-center">
 					<h2 className="mt-1">Dashboard</h2>
 				</div>
@@ -30,7 +33,11 @@ export default function Dashboard() {
 						onClick={() => setToggleDropdown((prev) => !prev)}
 					>
 						<div className="avatar">
-							<img src={`${import.meta.env.VITE_API_URL}${user.avatar}`} />
+							{!user.avatar ? (
+								getFirstLetter(user.name)
+							) : (
+								<img src={`${import.meta.env.VITE_API_URL}${user.avatar}`} />
+							)}
 						</div>
 					</a>
 					<ul
@@ -39,10 +46,10 @@ export default function Dashboard() {
 						}`}
 					>
 						<li>
-							<div className="dropdown-item">
+							<Link to="/user/info" className="dropdown-item">
 								<i className="bx bx-power-off me-2"></i>
 								<span className="align-middle">{user.name}</span>
-							</div>
+							</Link>
 						</li>
 						<li>
 							<div className="dropdown-divider"></div>
