@@ -6,26 +6,62 @@ import { CiMail } from 'react-icons/ci';
 import { IoPhonePortraitOutline } from 'react-icons/io5';
 import { useEffect, useState } from 'react';
 import { api } from '../../../utils/api.ts';
+import Toast from '../../../components/Toast/Toast.tsx';
+
+type User = {
+	id: string;
+	name: string;
+	address: string;
+	neighborhood: string;
+	city: string;
+	state: string;
+	login: string;
+	access_level: number;
+	expiration: number;
+	picture: string;
+	email: string;
+	phone: string;
+	status: boolean;
+};
 
 export default function FormUser() {
-	const [user, setUser] = useState({
+	const [user, setUser] = useState<User>({
+		id: '',
 		name: '',
+		address: '',
+		neighborhood: '',
+		city: '',
+		state: '',
+		login: '',
+		access_level: 0,
+		expiration: 0,
+		picture: '',
 		email: '',
 		phone: '',
-		picture: '',
+		status: true,
 	});
+
+	const [showToast, setShowToast] = useState(false);
+	const [toastMessage, setToastMessage] = useState('');
+	const [toastType, setToastType] = useState<'success' | 'error'>('success');
 
 	const getUser = async () => {
 		const userId = localStorage.getItem('userId');
-		const response = await api.get(`/user/${userId}`);
-		setUser(response.data);
+		if (!userId) return;
+
+		try {
+			const response = await api.get(`/user/${userId}`);
+			setUser(response.data);
+		} catch (error) {
+			console.error('Erro ao buscar usuário:', error);
+		}
 	};
 
 	useEffect(() => {
 		getUser();
 	}, []);
 
-	const handleChange = (e) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 		setUser((prev) => ({
 			...prev,
@@ -33,17 +69,67 @@ export default function FormUser() {
 		}));
 	};
 
+	const saveInfo = async (e: React.FormEvent) => {
+		e.preventDefault();
+		if (!user.id) return;
+
+		localStorage.setItem('userName', user.name);
+
+		try {
+			console.log({
+				...user,
+				name: user.name,
+				email: user.email,
+				phone: user.phone,
+			});
+			await api.put(`/user/${user.id}`, {
+				...user,
+				name: user.name,
+				email: user.email,
+				phone: user.phone,
+			});
+			handleSuccess();
+		} catch (error) {
+			console.error('Erro ao salvar informações:', error);
+			handleError();
+		}
+	};
+
+	const handleSuccess = () => {
+		setToastMessage('Dados salvos com sucesso!');
+		setToastType('success');
+		setShowToast(true);
+		// closeToast();
+	};
+
+	const handleError = () => {
+		setToastMessage('Ocorreu um erro ao salvar.');
+		setToastType('error');
+		setShowToast(true);
+		closeToast();
+	};
+
+	const closeToast = () => {
+		setTimeout(() => {
+			setShowToast(false);
+		}, 2000);
+	};
+
 	return (
 		<>
 			<Sidebar />
+
 			<div className="container">
 				<div className="info d-block text-center">
 					<div className="avatar_user align-content-center">
-						<img src={`${import.meta.env.VITE_API_URL}${user.picture}`} />
+						<img
+							src={`${import.meta.env.VITE_API_URL}${user.picture}`}
+							alt="Avatar"
+						/>
 					</div>
 				</div>
 				<div className="mt-4">
-					<form className="row">
+					<form className="row" onSubmit={saveInfo}>
 						<div className="mb-2">
 							<div className="input-group mb-2">
 								<input
@@ -95,7 +181,13 @@ export default function FormUser() {
 								</div>
 							</div>
 						</div>
+						<button type="submit" className="rounded btn btn-primary">
+							Salvar
+						</button>
 					</form>
+					<div className="row p-2 position-relative">
+						<Toast type={toastType} message={toastMessage} show={showToast} />
+					</div>
 				</div>
 			</div>
 			<Navbar />

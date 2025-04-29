@@ -1,0 +1,29 @@
+.toast-container {
+  padding: 8px;
+
+  border-radius: 5px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  z-index: 9999;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.toast-container.success {
+  background-color: #28a745;
+}
+
+.toast-container.error {
+  background-color: #dc3545;
+}
+
+.toast-container button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 10px;
+}
