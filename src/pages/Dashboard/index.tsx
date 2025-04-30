@@ -1,6 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from '../../components/Navbar/Navbar';
-import Sidebar from '../../components/Sidebar/sidebar';
+
 import './style.css';
 import CardOrder from '../../components/CardOrder/CardOrder.tsx';
 import { useEffect, useState } from 'react';

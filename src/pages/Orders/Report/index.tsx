@@ -1,5 +1,3 @@
-import Sidebar from '../../../components/Sidebar/sidebar.tsx';
-import Navbar from '../../../components/Navbar/Navbar.tsx';
 import './styles.css';
 
 export default function ReportOrders() {

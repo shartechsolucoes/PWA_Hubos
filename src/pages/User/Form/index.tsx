@@ -1,5 +1,3 @@
-import Sidebar from '../../../components/Sidebar/sidebar.tsx';
-import Navbar from '../../../components/Navbar/Navbar.tsx';
 import './style.css';
 import { MdDriveFileRenameOutline } from 'react-icons/md';
 import { CiMail } from 'react-icons/ci';

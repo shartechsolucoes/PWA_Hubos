@@ -73,8 +73,6 @@ const KitSelector: React.FC<Props> = ({ kits }) => {
 			<ul className="list-group">
 				{kits.map((kit) => {
 					const selected = isSelected(kit.id);
-					const currentQty =
-						selectedKits.find((k) => k.id === kit.id)?.quantity ?? 1;
 
 					return (
 						<li key={kit.id} className="list-group-item">

@@ -1,9 +1,6 @@
-import Sidebar from '../../../components/Sidebar/sidebar.tsx';
-import Navbar from '../../../components/Navbar/Navbar.tsx';
 import { useEffect, useState } from 'react';
 import './style.css';
-import { MdDriveFileRenameOutline } from 'react-icons/md';
-import { BsQrCodeScan } from 'react-icons/bs';
+
 import QRCodeScanner from './QrCodeScanner/QRCodeScanner.tsx';
 import AddressForm from './AddressForm/AddressForm.tsx';
 import KitSelector from './KitSelector/KitSelector.tsx';

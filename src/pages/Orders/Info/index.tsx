@@ -1,5 +1,3 @@
-import Sidebar from '../../../components/Sidebar/sidebar.tsx';
-import Navbar from '../../../components/Navbar/Navbar.tsx';
 import { BsQrCodeScan } from 'react-icons/bs';
 import './ordersInfo.css';
 import { api } from '../../../utils/api.ts';

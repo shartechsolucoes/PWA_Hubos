@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { KitMaterialType } from '../../pages/Orders/Info/types';
 
 import './style.css';
@@ -12,9 +11,6 @@ export default function KitCard({
 	materials: KitMaterialType[];
 	quantity: number;
 }) {
-	useEffect(() => {
-		console.log(materials);
-	}, {});
 	return (
 		<div className="cardKit d-flex kitItem gap-3 box-shadow">
 			<div className="kitQTD">

@@ -13,7 +13,7 @@ export default function Login() {
 	const [erro, setErro] = useState('');
 	const [carregando, setCarregando] = useState(false);
 
-	const handleLogin = async (e) => {
+	const handleLogin = async (e: any) => {
 		e.preventDefault();
 		setCarregando(true);
 		setErro('');

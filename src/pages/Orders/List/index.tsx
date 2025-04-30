@@ -1,10 +1,7 @@
-import Sidebar from '../../../components/Sidebar/sidebar.tsx';
-import Navbar from '../../../components/Navbar/Navbar.tsx';
-import { MdOutlineAdd } from 'react-icons/md';
 import './styles.css';
 import CardOrder from '../../../components/CardOrder/CardOrder.tsx';
 import { useEffect, useState } from 'react';
-import { format } from 'date-fns';
+
 import { api } from '../../../utils/api.ts';
 import { IoSearch } from 'react-icons/io5';
 
