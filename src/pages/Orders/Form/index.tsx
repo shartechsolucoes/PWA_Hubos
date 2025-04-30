@@ -1,9 +1,14 @@
 import Sidebar from '../../../components/Sidebar/sidebar.tsx';
 import Navbar from '../../../components/Navbar/Navbar.tsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './style.css';
 import { MdDriveFileRenameOutline } from 'react-icons/md';
 import { BsQrCodeScan } from 'react-icons/bs';
+import QRCodeScanner from './QrCodeScanner/QRCodeScanner.tsx';
+import AddressForm from './AddressForm/AddressForm.tsx';
+import KitSelector from './KitSelector/KitSelector.tsx';
+import { KitType } from '../Info/types';
+import { api } from '../../../utils/api.ts';
 
 const steps = [
 	{
@@ -54,6 +59,18 @@ export default function FormOrders() {
 
 		setLoading(true);
 	}
+
+	const [selectedKits, setSelectedKits] = useState<KitType[]>([]);
+
+	const getKits = async () => {
+		const response = await api.get('kits');
+		const kits: KitType[] = response.data;
+		setSelectedKits(kits);
+	};
+
+	useEffect(() => {
+		getKits();
+	}, []);
 	return (
 		<>
 			<div className="container">
@@ -66,136 +83,12 @@ export default function FormOrders() {
 						<div className="fields-container">
 							<p>{steps[currentStep].title}</p>
 
-							{steps[currentStep].id === 'QRCODE' && (
-								<div className="fields row">
-									<div className="codeRead"></div>
-									<div className="col-12">
-										<div className="input-group mt-2">
-											<input
-												type="text"
-												className="form-control"
-												id="password"
-												placeholder="Nome"
-											/>
-											<div className="input-group-prepend">
-												<div className="input-group-text">
-													<BsQrCodeScan />
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							)}
+							{steps[currentStep].id === 'QRCODE' && <QRCodeScanner />}
 
-							{steps[currentStep].id === 'INFO' && (
-								<div className="fields row">
-									<div className="col-12">
-										<p>#1230002</p>
-									</div>
-									<div className="col-12">
-										<div className="input-group mt-2">
-											<input
-												type="text"
-												className="form-control"
-												id="protocol"
-												placeholder="N° Protocolo"
-											/>
-											<div className="input-group-prepend">
-												<div className="input-group-text">
-													<MdDriveFileRenameOutline />
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className="col-12">
-										<div className="input-group mt-2">
-											<input
-												type="text"
-												className="form-control"
-												id="adress"
-												placeholder="Endereço"
-											/>
-											<div className="input-group-prepend">
-												<div className="input-group-text">
-													<MdDriveFileRenameOutline />
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className="col-12">
-										<div className="input-group mt-2">
-											<input
-												type="text"
-												className="form-control"
-												id="adress"
-												placeholder="Bairro"
-											/>
-											<div className="input-group-prepend">
-												<div className="input-group-text">
-													<MdDriveFileRenameOutline />
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className="col-8">
-										<div className="input-group mt-2">
-											<input
-												type="text"
-												className="form-control"
-												id="adress"
-												placeholder="Cidade"
-											/>
-											<div className="input-group-prepend">
-												<div className="input-group-text">
-													<MdDriveFileRenameOutline />
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className="col-4">
-										<div className="input-group mt-2">
-											<input
-												type="text"
-												className="form-control"
-												id="adress"
-												placeholder="UF"
-											/>
-											<div className="input-group-prepend">
-												<div className="input-group-text">
-													<MdDriveFileRenameOutline />
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className="col-12">
-										<div className="input-group mt-2">
-											<textarea
-												className="form-control"
-												id="exampleFormControlTextarea1"
-											></textarea>
-										</div>
-									</div>
-								</div>
-							)}
+							{steps[currentStep].id === 'INFO' && <AddressForm />}
 
 							{steps[currentStep].id === 'KITS' && (
-								<div className="fields row">
-									<div className="col-12">
-										<div className="input-group mt-2">
-											<input
-												type="text"
-												className="form-control"
-												id="adress"
-												placeholder="Selecione o Kit"
-											/>
-											<div className="input-group-prepend">
-												<div className="input-group-text">
-													<MdDriveFileRenameOutline />
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+								<KitSelector kits={selectedKits} />
 							)}
 
 							{steps[currentStep].id === 'PHOTOSTART' && (
@@ -210,22 +103,23 @@ export default function FormOrders() {
 								</div>
 							)}
 
-							{currentStep < steps.length - 1 && (
-								<button
-									className="mt-3 btn btn-dark next"
-									type="button"
-									onClick={handleNext}
-								>
-									Next
-								</button>
-							)}
+							<div className="d-flex justify-content-between">
+								{currentStep < steps.length - 1 && (
+									<button
+										className="mt-3 btn btn-dark next"
+										type="button"
+										onClick={handleNext}
+									>
+										Next
+									</button>
+								)}
 
-							{currentStep === steps.length - 1 && (
-								<button className="mt-3 btn btn-dark submit" type="submit">
-									Enviar
-								</button>
-							)}
-
+								{currentStep === steps.length - 1 && (
+									<button className="mt-3 btn btn-dark submit" type="submit">
+										Enviar
+									</button>
+								)}
+							</div>
 							{loading && <h1 className="loader">Enviando...</h1>}
 						</div>
 					</form>
