@@ -154,7 +154,12 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({
 		<div className="fields row">
 			<div
 				className="codeRead d-flex"
-				style={{ position: 'relative', overflow: 'hidden', width: '100%' }}
+				style={{
+					position: 'relative',
+					overflow: 'hidden',
+					width: '100%',
+					padding: '1em',
+				}}
 			>
 				{/* Botão de tirar foto */}
 				<button
@@ -163,11 +168,12 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({
 						padding: 0,
 						position: 'absolute',
 						bottom: '20px',
-						left: '20px',
+						left: '50%',
+						transform: 'translateX(-50%)',
 						zIndex: 10,
 						borderRadius: '50%',
-						height: '50px',
-						width: '50px',
+						height: '80px',
+						width: '80px',
 						backgroundColor: '#fff',
 						border: '2px solid #ccc',
 						display: 'flex',
@@ -175,10 +181,10 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({
 						justifyContent: 'center',
 						boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
 						background:
-							'linear-gradient(90deg,rgba(7, 170, 232, 1) 0%, rgba(46, 83, 164, 1) 74%)',
+							'linear-gradient(90deg, rgba(7, 170, 232, 1) 0%, rgba(46, 83, 164, 1) 74%)',
 					}}
 				>
-					<FaCamera height={40} width={40} />
+					<FaCamera style={{ fontSize: '32px' }} color="#fff" />
 				</button>
 
 				{/* Vídeo ao fundo */}
@@ -191,7 +197,7 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({
 						style={{
 							width: '100%',
 							borderRadius: '10px',
-							height: '600px',
+							height: '90%',
 							objectFit: 'cover',
 						}}
 					/>
