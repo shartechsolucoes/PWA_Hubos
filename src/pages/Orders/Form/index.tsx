@@ -49,6 +49,9 @@ export default function FormOrders() {
 	function handleNext() {
 		setCurrentStep((prevState) => prevState + 1);
 	}
+	function handlePreview() {
+		setCurrentStep((prevState) => prevState - 1);
+	}
 
 	async function handleSubmit(e: { preventDefault: () => void }) {
 		e.preventDefault();
@@ -91,13 +94,9 @@ export default function FormOrders() {
 
 							{steps[currentStep].id === 'PHOTOSTART' && <CameraCapture />}
 
-							{steps[currentStep].id === 'PHOTOEND' && (
-								<div className="fields row">
-									<div className="codeRead"></div>
-								</div>
-							)}
+							{steps[currentStep].id === 'PHOTOEND' && <CameraCapture />}
 
-							<div className="d-flex justify-content-between">
+							<div className="d-flex flex-row-reverse justify-content-between">
 								{currentStep < steps.length - 1 && (
 									<button
 										className="mt-3 btn btn-dark next"
@@ -111,6 +110,15 @@ export default function FormOrders() {
 								{currentStep === steps.length - 1 && (
 									<button className="mt-3 btn btn-dark submit" type="submit">
 										Enviar
+									</button>
+								)}
+								{currentStep > 1 && (
+									<button
+										className="mt-3 btn btn-dark next"
+										type="button"
+										onClick={handlePreview}
+									>
+										Preview
 									</button>
 								)}
 							</div>
