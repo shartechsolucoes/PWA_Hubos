@@ -6,6 +6,7 @@ import AddressForm from './AddressForm/AddressForm.tsx';
 import KitSelector from './KitSelector/KitSelector.tsx';
 import { KitType } from '../Info/types';
 import { api } from '../../../utils/api.ts';
+import CameraCapture from './CameraCapture/CameraCapture.tsx';
 
 const steps = [
 	{
@@ -88,11 +89,7 @@ export default function FormOrders() {
 								<KitSelector kits={selectedKits} />
 							)}
 
-							{steps[currentStep].id === 'PHOTOSTART' && (
-								<div className="fields row">
-									<div className="codeRead"></div>
-								</div>
-							)}
+							{steps[currentStep].id === 'PHOTOSTART' && <CameraCapture />}
 
 							{steps[currentStep].id === 'PHOTOEND' && (
 								<div className="fields row">

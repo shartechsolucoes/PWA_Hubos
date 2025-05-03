@@ -1,6 +1,7 @@
-.codeRead{
-    width: 200px;
-    height: 200px;
+.codeRead {
+    width: 80vw;
+    height: 60vh;
     background: #eaeaea;
     margin: auto;
+    overflow-y: hidden;
 }

@@ -14,24 +14,22 @@ export default function QRCodeScanner() {
 			const qrCodeScanner = new Html5Qrcode('qr-reader');
 			html5QrCodeRef.current = qrCodeScanner;
 
-			Html5Qrcode.getCameras()
-				.then((devices) => {
-					if (devices.length) {
-						const cameraId = devices[0].id;
-						qrCodeScanner.start(
-							cameraId,
-							config,
-							(decodedText) => {
-								setScannedCode(decodedText);
-								qrCodeScanner.clear();
-							},
-							(error) => {
-								console.warn('QR scan error', error);
-							}
-						);
+			// Usa câmera traseira com facingMode
+			qrCodeScanner
+				.start(
+					{ facingMode: 'environment' },
+					config,
+					(decodedText) => {
+						setScannedCode(decodedText);
+						qrCodeScanner.pause();
+					},
+					(error) => {
+						console.warn('Erro ao escanear QR Code:', error);
 					}
-				})
-				.catch((err) => console.error('Camera error:', err));
+				)
+				.catch((err) => {
+					console.error('Erro ao iniciar scanner:', err);
+				});
 		}
 
 		return () => {
