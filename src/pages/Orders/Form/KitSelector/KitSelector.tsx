@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 type Material = {
 	id: number;
@@ -30,13 +30,24 @@ type SelectedKit = {
 };
 
 type Props = {
-	kits: Kit[];
-	// onSelect: (selectedKits: SelectedKit[]) => void;
+	kits: Kit[]; // disponíveis
+	value?: SelectedKit[]; // pré-selecionados
+	onSelect: (selectedKits: SelectedKit[]) => void;
 };
 
-const KitSelector: React.FC<Props> = ({ kits }) => {
-	const [selectedKits, setSelectedKits] = useState<SelectedKit[]>([]);
+const KitSelector: React.FC<Props> = ({ kits, value = [], onSelect }) => {
+	const [selectedKits, setSelectedKits] = useState<SelectedKit[]>(value);
 	const [expandedKits, setExpandedKits] = useState<number[]>([]);
+
+	// Atualiza o estado interno quando o pai passa um novo valor
+	useEffect(() => {
+		setSelectedKits(value);
+	}, [value]);
+
+	// Notifica o pai quando os kits mudam
+	useEffect(() => {
+		onSelect(selectedKits);
+	}, [selectedKits]);
 
 	const handleKitToggle = (kit: Kit) => {
 		const isAlreadySelected = selectedKits.some((k) => k.id === kit.id);
@@ -46,7 +57,6 @@ const KitSelector: React.FC<Props> = ({ kits }) => {
 			: [...selectedKits, { ...kit, quantity: 1 }];
 
 		setSelectedKits(updated);
-		console.log(updated);
 	};
 
 	const handleQuantityChange = (kitId: number, newQuantity: number) => {
@@ -104,14 +114,10 @@ const KitSelector: React.FC<Props> = ({ kits }) => {
 										}
 										onChange={(e) => {
 											const value = e.target.value;
-
-											// Permite campo vazio
 											if (value === '') {
-												handleQuantityChange(kit.id, 0); // Temporário
+												handleQuantityChange(kit.id, 0);
 												return;
 											}
-
-											// Valida se é número positivo
 											const numericValue = parseInt(value);
 											if (!isNaN(numericValue) && numericValue >= 0) {
 												handleQuantityChange(kit.id, numericValue);

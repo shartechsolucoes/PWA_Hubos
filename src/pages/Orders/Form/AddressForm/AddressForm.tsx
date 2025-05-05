@@ -10,15 +10,29 @@ interface FormData {
 	country: string;
 }
 
-const MyFormComponent: React.FC = () => {
-	const [formData, setFormData] = useState<FormData>({
-		protocol: '',
-		address: '',
-		neighborhood: '',
-		city: '',
-		state: '',
-		country: '',
-	});
+interface Props {
+	onChange: (data: FormData) => void;
+	value?: FormData; // <-- nova prop opcional para valores iniciais
+}
+
+const MyFormComponent: React.FC<Props> = ({ onChange, value }) => {
+	const [formData, setFormData] = useState<FormData>(
+		value || {
+			protocol: '',
+			address: '',
+			neighborhood: '',
+			city: '',
+			state: '',
+			country: '',
+		}
+	);
+
+	// Atualiza o estado local caso o valor externo mude
+	useEffect(() => {
+		if (value) {
+			setFormData(value);
+		}
+	}, [value]);
 
 	useEffect(() => {
 		const fetchLocationData = async () => {
@@ -37,29 +51,30 @@ const MyFormComponent: React.FC = () => {
 							if (data.status === 'OK') {
 								const addressComponents = data.results[0].address_components;
 								const newFormData: FormData = {
-									protocol: formData.protocol,
+									...formData,
 									address:
-										addressComponents.find((component: any) =>
-											component.types.includes('route')
+										addressComponents.find((c: any) =>
+											c.types.includes('route')
 										)?.long_name || '',
 									neighborhood:
-										addressComponents.find((component: any) =>
-											component.types.includes('neighborhood')
+										addressComponents.find((c: any) =>
+											c.types.includes('sublocality')
 										)?.long_name || '',
 									city:
-										addressComponents.find((component: any) =>
-											component.types.includes('locality')
+										addressComponents.find((c: any) =>
+											c.types.includes('administrative_area_level_2')
 										)?.long_name || '',
 									state:
-										addressComponents.find((component: any) =>
-											component.types.includes('administrative_area_level_1')
+										addressComponents.find((c: any) =>
+											c.types.includes('administrative_area_level_1')
 										)?.short_name || '',
 									country:
-										addressComponents.find((component: any) =>
-											component.types.includes('country')
+										addressComponents.find((c: any) =>
+											c.types.includes('country')
 										)?.long_name || '',
 								};
 								setFormData(newFormData);
+								onChange(newFormData);
 							} else {
 								console.error('Erro ao obter dados de localização');
 							}
@@ -80,125 +95,53 @@ const MyFormComponent: React.FC = () => {
 		};
 
 		fetchLocationData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	const updateField = (field: keyof FormData, value: string) => {
+		const updated = { ...formData, [field]: value };
+		setFormData(updated);
+		onChange(updated);
+	};
 
 	return (
 		<div className="fields row">
 			<div className="col-12">
 				<p>#{formData.protocol}</p>
 			</div>
-			<div className="col-12">
-				<div className="input-group mt-2">
-					<input
-						type="text"
-						className="form-control"
-						id="protocol"
-						placeholder="N° Protocolo"
-						value={formData.protocol}
-						onChange={(e) =>
-							setFormData({ ...formData, protocol: e.target.value })
-						}
-					/>
-					<div className="input-group-prepend">
-						<div className="input-group-text">
-							<MdDriveFileRenameOutline />
+			{(
+				[
+					'protocol',
+					'address',
+					'neighborhood',
+					'city',
+					'state',
+					'country',
+				] as (keyof FormData)[]
+			).map((field) => (
+				<div
+					className={`col-${
+						field === 'state' ? '4' : field === 'city' ? '8' : '12'
+					}`}
+					key={field}
+				>
+					<div className="input-group mt-2">
+						<input
+							type="text"
+							className="form-control"
+							id={field}
+							placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+							value={formData[field]}
+							onChange={(e) => updateField(field, e.target.value)}
+						/>
+						<div className="input-group-prepend">
+							<div className="input-group-text">
+								<MdDriveFileRenameOutline />
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div className="col-12">
-				<div className="input-group mt-2">
-					<input
-						type="text"
-						className="form-control"
-						id="address"
-						placeholder="Endereço"
-						value={formData.address}
-						onChange={(e) =>
-							setFormData({ ...formData, address: e.target.value })
-						}
-					/>
-					<div className="input-group-prepend">
-						<div className="input-group-text">
-							<MdDriveFileRenameOutline />
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className="col-12">
-				<div className="input-group mt-2">
-					<input
-						type="text"
-						className="form-control"
-						id="neighborhood"
-						placeholder="Bairro"
-						value={formData.neighborhood}
-						onChange={(e) =>
-							setFormData({ ...formData, neighborhood: e.target.value })
-						}
-					/>
-					<div className="input-group-prepend">
-						<div className="input-group-text">
-							<MdDriveFileRenameOutline />
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className="col-8">
-				<div className="input-group mt-2">
-					<input
-						type="text"
-						className="form-control"
-						id="city"
-						placeholder="Cidade"
-						value={formData.city}
-						onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-					/>
-					<div className="input-group-prepend">
-						<div className="input-group-text">
-							<MdDriveFileRenameOutline />
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className="col-4">
-				<div className="input-group mt-2">
-					<input
-						type="text"
-						className="form-control"
-						id="state"
-						placeholder="UF"
-						value={formData.state}
-						onChange={(e) =>
-							setFormData({ ...formData, state: e.target.value })
-						}
-					/>
-					<div className="input-group-prepend">
-						<div className="input-group-text">
-							<MdDriveFileRenameOutline />
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className="col-12">
-				<div className="input-group mt-2">
-					<input
-						type="text"
-						className="form-control"
-						id="country"
-						placeholder="País"
-						value={formData.country}
-						onChange={(e) =>
-							setFormData({ ...formData, country: e.target.value })
-						}
-					/>
-					<div className="input-group-prepend">
-						<div className="input-group-text">
-							<MdDriveFileRenameOutline />
-						</div>
-					</div>
-				</div>
-			</div>
+			))}
 		</div>
 	);
 };

@@ -5,6 +5,7 @@ import { FaCamera } from 'react-icons/fa';
 interface CameraCaptureProps {
 	uploadUrl: string;
 	previewBaseUrl?: string;
+	onCapture: (url: string) => void; // ✅ NOVA PROP OBRIGATÓRIA
 	onUploadSuccess?: (data: any) => void;
 	onUploadError?: (error: any) => void;
 }
@@ -12,6 +13,7 @@ interface CameraCaptureProps {
 const CameraCapture: React.FC<CameraCaptureProps> = ({
 	uploadUrl,
 	previewBaseUrl,
+	onCapture,
 	onUploadSuccess,
 	onUploadError,
 }) => {
@@ -83,6 +85,7 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({
 
 				setPhoto(previewUrl);
 				onUploadSuccess?.(data);
+				onCapture(previewUrl);
 			})
 			.catch((err) => {
 				console.error('Erro no upload:', err);
