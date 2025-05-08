@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { MdDriveFileRenameOutline } from 'react-icons/md';
 
 interface FormData {
-	protocol: string;
+	protocolNumber: string;
 	address: string;
 	neighborhood: string;
 	city: string;
 	state: string;
 	country: string;
+	lat: string;
+	long: string;
+	observations: string;
 }
 
 interface Props {
@@ -18,20 +21,20 @@ interface Props {
 const MyFormComponent: React.FC<Props> = ({ onChange, value }) => {
 	const [formData, setFormData] = useState<FormData>(
 		value || {
-			protocol: '',
+			protocolNumber: '',
 			address: '',
 			neighborhood: '',
 			city: '',
 			state: '',
 			country: '',
+			lat: '',
+			long: '',
+			observations: '',
 		}
 	);
 
-	// Atualiza o estado local caso o valor externo mude
 	useEffect(() => {
-		if (value) {
-			setFormData(value);
-		}
+		if (value) setFormData(value);
 	}, [value]);
 
 	useEffect(() => {
@@ -52,6 +55,8 @@ const MyFormComponent: React.FC<Props> = ({ onChange, value }) => {
 								const addressComponents = data.results[0].address_components;
 								const newFormData: FormData = {
 									...formData,
+									lat: `${latitude}`,
+									long: `${longitude}`,
 									address:
 										addressComponents.find((c: any) =>
 											c.types.includes('route')
@@ -85,12 +90,10 @@ const MyFormComponent: React.FC<Props> = ({ onChange, value }) => {
 							);
 						}
 					},
-					(error) => {
-						console.error('Erro ao obter localização:', error);
-					}
+					(error) => console.error('Erro ao obter localização:', error)
 				);
 			} else {
-				console.error('Geolocalização não é suportada neste navegador');
+				console.error('Geolocalização não suportada');
 			}
 		};
 
@@ -107,11 +110,12 @@ const MyFormComponent: React.FC<Props> = ({ onChange, value }) => {
 	return (
 		<div className="fields row">
 			<div className="col-12">
-				<p>#{formData.protocol}</p>
+				<p>#{formData.protocolNumber}</p>
 			</div>
+
 			{(
 				[
-					'protocol',
+					'protocolNumber',
 					'address',
 					'neighborhood',
 					'city',
@@ -142,6 +146,20 @@ const MyFormComponent: React.FC<Props> = ({ onChange, value }) => {
 					</div>
 				</div>
 			))}
+
+			<div className="col-12 mt-3">
+				<label htmlFor="observations" className="form-label">
+					Observações
+				</label>
+				<textarea
+					id="observations"
+					className="form-control"
+					rows={4}
+					placeholder="Digite observações relevantes..."
+					value={formData.observations}
+					onChange={(e) => updateField('observations', e.target.value)}
+				/>
+			</div>
 		</div>
 	);
 };

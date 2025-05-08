@@ -8,14 +8,15 @@ export function createSubmission(
 		neighborhood: data.neighborhood || '',
 		city: data.city || '',
 		state: data.state || '',
-		status: data.status || '',
+		status: data.status || 1,
 		observations: data.observations || '',
 		qr_code: data.qr_code || '',
-		lat: data.lat || 0,
-		long: data.long || 0,
+		lat: `${data.lat}` || '',
+		long: `${data.long}` || '',
 		ordersKits: data.ordersKits || [],
 		protocolNumber: data.protocolNumber || '',
 		photoStartWork: data.photoStartWork || '',
 		photoEndWork: data.photoEndWork || '',
+		userId: data.userId || '',
 	};
 }

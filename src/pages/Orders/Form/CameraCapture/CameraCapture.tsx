@@ -233,7 +233,7 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({
 								style={{
 									width: '100%',
 									borderRadius: '10px',
-									height: '500px',
+									height: '86%',
 									objectFit: 'cover',
 								}}
 							/>

@@ -23,15 +23,13 @@ type Kit = {
 };
 
 type SelectedKit = {
-	id: number;
-	description: string;
-	quantity: number;
-	materials: KitMaterial[];
+	kit_id: number;
+	quantity: string;
 };
 
 type Props = {
-	kits: Kit[]; // disponíveis
-	value?: SelectedKit[]; // pré-selecionados
+	kits: Kit[];
+	value?: SelectedKit[];
 	onSelect: (selectedKits: SelectedKit[]) => void;
 };
 
@@ -39,30 +37,28 @@ const KitSelector: React.FC<Props> = ({ kits, value = [], onSelect }) => {
 	const [selectedKits, setSelectedKits] = useState<SelectedKit[]>(value);
 	const [expandedKits, setExpandedKits] = useState<number[]>([]);
 
-	// Atualiza o estado interno quando o pai passa um novo valor
 	useEffect(() => {
 		setSelectedKits(value);
 	}, [value]);
 
-	// Notifica o pai quando os kits mudam
 	useEffect(() => {
 		onSelect(selectedKits);
 	}, [selectedKits]);
 
 	const handleKitToggle = (kit: Kit) => {
-		const isAlreadySelected = selectedKits.some((k) => k.id === kit.id);
+		const isAlreadySelected = selectedKits.some((k) => k.kit_id === kit.id);
 
 		const updated = isAlreadySelected
-			? selectedKits.filter((k) => k.id !== kit.id)
-			: [...selectedKits, { ...kit, quantity: 1 }];
+			? selectedKits.filter((k) => k.kit_id !== kit.id)
+			: [...selectedKits, { kit_id: kit.id, quantity: '1' }];
 
 		setSelectedKits(updated);
 	};
 
-	const handleQuantityChange = (kitId: number, newQuantity: number) => {
+	const handleQuantityChange = (kitId: number, newQuantity: string) => {
 		setSelectedKits((prev) =>
 			prev.map((kit) =>
-				kit.id === kitId ? { ...kit, quantity: newQuantity } : kit
+				kit.kit_id === kitId ? { ...kit, quantity: newQuantity } : kit
 			)
 		);
 	};
@@ -75,7 +71,8 @@ const KitSelector: React.FC<Props> = ({ kits, value = [], onSelect }) => {
 		);
 	};
 
-	const isSelected = (id: number) => selectedKits.some((kit) => kit.id === id);
+	const isSelected = (id: number) =>
+		selectedKits.some((kit) => kit.kit_id === id);
 
 	return (
 		<div className="kit-selector">
@@ -108,19 +105,13 @@ const KitSelector: React.FC<Props> = ({ kits, value = [], onSelect }) => {
 										type="text"
 										className="form-control form-control-sm w-25 mx-2"
 										value={
-											selectedKits
-												.find((k) => k.id === kit.id)
-												?.quantity?.toString() ?? ''
+											selectedKits.find((k) => k.kit_id === kit.id)?.quantity ??
+											''
 										}
 										onChange={(e) => {
 											const value = e.target.value;
-											if (value === '') {
-												handleQuantityChange(kit.id, 0);
-												return;
-											}
-											const numericValue = parseInt(value);
-											if (!isNaN(numericValue) && numericValue >= 0) {
-												handleQuantityChange(kit.id, numericValue);
+											if (/^\d*$/.test(value)) {
+												handleQuantityChange(kit.id, value);
 											}
 										}}
 										inputMode="numeric"

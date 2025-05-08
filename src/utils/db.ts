@@ -6,15 +6,16 @@ export interface OfflineSubmission {
 	neighborhood: string;
 	city: string;
 	state: string;
-	status: string;
 	observations: string;
 	qr_code: string;
-	lat: number;
-	long: number;
-	ordersKits: { kitId: string; quantity: number }[];
+	lat: string;
+	long: string;
+	ordersKits: { kit_id: number; quantity: string }[];
 	protocolNumber: string;
 	photoStartWork: string;
 	photoEndWork: string;
+	status: number;
+	userId: string;
 }
 
 class AppDB extends Dexie {

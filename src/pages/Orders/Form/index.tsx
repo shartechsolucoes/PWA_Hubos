@@ -86,8 +86,9 @@ export default function FormOrders() {
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		setLoading(true);
+		const userId = localStorage.getItem('userId');
 
-		const submission = createSubmission(formData);
+		const submission = createSubmission({ ...formData, userId });
 
 		if (!formData.qr_code) {
 			alert('QR Code é obrigatório!');
@@ -103,7 +104,7 @@ export default function FormOrders() {
 		}
 
 		try {
-			await api.post('/submit', submission);
+			await api.post('/order', submission);
 			alert('Enviado com sucesso!');
 			localStorage.removeItem(STORAGE_KEY); // limpar cache após envio
 		} catch (error) {
@@ -147,11 +148,11 @@ export default function FormOrders() {
 						{steps[currentStep].id === 'KITS' && (
 							<KitSelector
 								kits={availableKits}
-								value={formData.kits} // <-- passando valor salvo
+								value={formData.ordersKits} // <-- passando valor salvo
 								onSelect={(selected) => {
 									setFormData((prev: any) => ({
 										...prev,
-										kits: selected,
+										ordersKits: selected,
 									}));
 								}}
 							/>
