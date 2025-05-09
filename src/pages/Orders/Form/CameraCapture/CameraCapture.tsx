@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as exifr from 'exifr';
 import { FaCamera } from 'react-icons/fa';
+import { api } from '../../../../utils/api';
 
 interface CameraCaptureProps {
 	uploadUrl: string;
@@ -72,10 +73,12 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({
 		const formData = new FormData();
 		formData.append('photo', imageBlob, 'photo.jpg');
 
-		fetch(uploadUrl, {
-			method: 'POST',
-			body: formData,
-		})
+		api
+			.post(uploadUrl, formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			})
 			.then((res) => res.json())
 			.then((data) => {
 				const previewUrl =

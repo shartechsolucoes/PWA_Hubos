@@ -160,7 +160,7 @@ export default function FormOrders() {
 
 						{steps[currentStep].id === 'PHOTOSTART' && (
 							<CameraCapture
-								uploadUrl="/api/fotos"
+								uploadUrl={`/order/start-work-photo?&os=${formData.qr_code}`}
 								previewBaseUrl="/uploads"
 								onCapture={(url) =>
 									setFormData((prev: any) => ({ ...prev, photoStartWork: url }))
@@ -170,8 +170,8 @@ export default function FormOrders() {
 
 						{steps[currentStep].id === 'PHOTOEND' && (
 							<CameraCapture
-								uploadUrl="/api/fotos"
-								previewBaseUrl="/uploads"
+								uploadUrl={`/order/end-work-photo?&os=${formData.qr_code}`}
+								previewBaseUrl={`order/end-work-photo?&os=${formData.qr_code}`}
 								onCapture={(url) =>
 									setFormData((prev: any) => ({ ...prev, photoEndWork: url }))
 								}
