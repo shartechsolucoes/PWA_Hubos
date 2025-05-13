@@ -42,32 +42,28 @@ export default function FormOrders() {
 
 	const steps = createSteps(isOnline);
 
-	const { canProceedToStep, photosSkipped } = useSkipPhotoSteps({
+	const {
+		canProceedToStep,
+		photosSkipped,
+		setPhotosSkipped,
+		goToSubmit,
+		setGoToSubmit,
+	} = useSkipPhotoSteps({
 		steps,
 		currentStep,
 		isOnline,
-		onSkipPhotos: () => {
-			alert('Você ficou offline por um tempo. Etapas de foto foram puladas.');
-			setCurrentStep(5); // OFFLINE
-		},
 	});
+
+	// useEffect(() => {
+	// 	if (goToSubmit) {
+	// 		setCurrentStep(steps.length - 1); // Ir para SUBMIT
+	// 		setGoToSubmit(false);
+	// 	}
+	// }, [goToSubmit]);
 
 	useEffect(() => {
 		loadSubmissions();
 	}, []);
-
-	useEffect(() => {
-		// Verifique se o usuário está online e se ele está em uma etapa de foto
-		if (
-			isOnline &&
-			currentStep < steps.length &&
-			(steps[currentStep].id === 'PHOTOSTART' ||
-				steps[currentStep].id === 'PHOTOEND')
-		) {
-			// Quando voltar online, pula para a próxima etapa
-			setCurrentStep(currentStep + 1);
-		}
-	}, [isOnline, currentStep, steps]);
 
 	useEffect(() => {
 		if (isOnline && submissions.length > 0) {
@@ -98,14 +94,24 @@ export default function FormOrders() {
 		const nextStep = currentStep + 1;
 		const currentId = steps[currentStep]?.id;
 
-		// Se estiver offline e estamos na tela de KITS, pular direto para tela OFFLINE
+		// 1. Impede sair da tela de kits se estiver offline
 		if (!isOnline && currentId === 'KITS') {
-			setCurrentStep(5); // Etapa OFFLINE
+			alert('Você está offline. Aguarde a conexão para prosseguir.');
 			return;
 		}
 
+		// 2. Se a conexão voltou e fotos foram puladas, vai direto para SUBMIT
+		if (goToSubmit && currentId === 'KITS' && photosSkipped) {
+			setCurrentStep(steps.length - 1); // Etapa de envio
+			// setGoToSubmit(true);
+			// alert('Você ficou offline. As etapas de foto foram puladas.');
+			return;
+		}
+
+		// 3. Bloqueia avanço para etapas de foto se estiver offline
 		if (!canProceedToStep(nextStep)) return;
 
+		// 4. Avança normalmente
 		if (nextStep < steps.length) {
 			setCurrentStep(nextStep);
 		}
@@ -113,13 +119,14 @@ export default function FormOrders() {
 
 	const handlePreview = () => {
 		const currentId = steps[currentStep]?.id;
-
-		// Se estamos na etapa OFFLINE, voltar para KITS
-		if (currentId === 'OFFLINE') {
-			setCurrentStep(2); // Etapa KITS
+		if (
+			(currentId === 'OFFLINE' || currentId === 'SUBMIT') &&
+			goToSubmit &&
+			photosSkipped
+		) {
+			setCurrentStep(2); // Volta para KITS
 			return;
 		}
-
 		setCurrentStep((prev) => prev - 1);
 	};
 
@@ -148,6 +155,9 @@ export default function FormOrders() {
 			localStorage.removeItem(STORAGE_KEY);
 			setCurrentStep(0);
 			setFormData({});
+			setPhotosSkipped(false);
+			localStorage.removeItem('photosSkipped');
+			localStorage.removeItem('goToSubmit');
 		} catch (error) {
 			console.error('Erro no envio:', error);
 			alert('Erro no envio. Salvando localmente...');
@@ -213,7 +223,7 @@ export default function FormOrders() {
 						{steps[currentStep].id === 'PHOTOEND' && !photosSkipped && (
 							<CameraCapture
 								uploadUrl={`/order/end-work-photo?&os=${formData.qr_code}`}
-								previewBaseUrl={`order/end-work-photo?&os=${formData.qr_code}`}
+								previewBaseUrl="/uploads"
 								onCapture={(url) =>
 									setFormData((prev: any) => ({ ...prev, photoEndWork: url }))
 								}
@@ -223,13 +233,10 @@ export default function FormOrders() {
 						{steps[currentStep].id === 'OFFLINE' && (
 							<div className="offline-warning">
 								<h4>Você está offline</h4>
+								<p>As etapas de foto foram puladas devido à conexão.</p>
 								<p>
-									As etapas de foto foram puladas devido à instabilidade da
-									conexão.
-								</p>
-								<p>
-									Se estiver tudo pronto, clique em <strong>Enviar</strong> para
-									salvar os dados localmente.
+									Se estiver tudo pronto, clique em Enviar para salvar os dados
+									localmente.
 								</p>
 							</div>
 						)}

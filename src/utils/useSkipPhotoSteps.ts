@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type Step = {
 	id: string;
@@ -9,38 +9,38 @@ export function useSkipPhotoSteps({
 	steps,
 	currentStep,
 	isOnline,
-	onSkipPhotos,
 }: {
 	steps: Step[];
 	currentStep: number;
 	isOnline: boolean;
-	onSkipPhotos: () => void;
 }) {
+	const [photosSkipped, setPhotosSkipped] = useState(() => {
+		return localStorage.getItem('photosSkipped') === 'true';
+	});
 	const [offlineSince, setOfflineSince] = useState<number | null>(null);
-	const [photosSkipped, setPhotosSkipped] = useState(false);
+	const [goToSubmit, setGoToSubmit] = useState(() => {
+		return localStorage.getItem('goToSubmit') === 'true';
+	});
 
 	useEffect(() => {
 		if (!isOnline && offlineSince === null) {
 			setOfflineSince(Date.now());
 		}
-	}, [isOnline]);
 
-	useEffect(() => {
+		// Quando voltar a ficar online
 		if (isOnline && offlineSince !== null) {
-			const offlineDuration = Date.now() - offlineSince;
+			const duration = Date.now() - offlineSince;
 			const currentId = steps[currentStep]?.id;
 
-			if (
-				offlineDuration > 1000 &&
-				(currentId === 'PHOTOSTART' || currentId === 'PHOTOEND') &&
-				!photosSkipped
-			) {
+			if (duration > 1000 && currentId === 'KITS') {
 				setPhotosSkipped(true);
-				onSkipPhotos();
+				setGoToSubmit(true);
+				localStorage.setItem('photosSkipped', 'true');
+				localStorage.setItem('goToSubmit', 'true');
 			}
 			setOfflineSince(null);
 		}
-	}, [isOnline, offlineSince, steps, currentStep, onSkipPhotos, photosSkipped]);
+	}, [isOnline, currentStep]);
 
 	function canProceedToStep(nextStepIndex: number): boolean {
 		const nextId = steps[nextStepIndex]?.id;
@@ -50,9 +50,8 @@ export function useSkipPhotoSteps({
 			return false;
 		}
 
-		// Impede retorno a etapas de foto, mesmo se voltar online
 		if (photosSkipped && (nextId === 'PHOTOSTART' || nextId === 'PHOTOEND')) {
-			alert('As etapas de foto foram puladas devido à conexão.');
+			// alert('As etapas de foto foram puladas devido à conexão.');
 			return false;
 		}
 
@@ -62,5 +61,8 @@ export function useSkipPhotoSteps({
 	return {
 		canProceedToStep,
 		photosSkipped,
+		setPhotosSkipped,
+		goToSubmit,
+		setGoToSubmit,
 	};
 }
