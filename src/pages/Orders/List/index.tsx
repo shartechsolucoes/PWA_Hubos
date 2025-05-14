@@ -1,7 +1,6 @@
 import './styles.css';
 import CardOrder from '../../../components/CardOrder/CardOrder.tsx';
 import { useEffect, useState } from 'react';
-
 import { api } from '../../../utils/api.ts';
 import { IoSearch } from 'react-icons/io5';
 
@@ -27,14 +26,33 @@ export default function ListOrders() {
 
 	const [isReady, setIsReady] = useState(false);
 	const [searchTerm, setSearchTerm] = useState('');
+	const [page, setPage] = useState(1);
+	const [hasMore, setHasMore] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 
-	const getOrders = async () => {
-		const userId = localStorage.getItem('userId');
+	const getOrders = async (pageToLoad = 1, reset = false) => {
+		if (isLoading) return;
+		setIsLoading(true);
 
-		const response = await api.get(
-			`/orders?dateStart=&userId=${userId}&os=${searchTerm}`
-		);
-		setOrders(response.data.orders);
+		try {
+			const userId = localStorage.getItem('userId');
+			const response = await api.get(
+				`/orders?dateStart=&userId=${userId}&os=${searchTerm}&page=${pageToLoad}`
+			);
+
+			const newOrders = response.data.orders;
+
+			if (newOrders.length === 0) {
+				setHasMore(false);
+			} else {
+				setOrders((prev) => (reset ? newOrders : [...prev, ...newOrders]));
+				setPage(pageToLoad + 1);
+			}
+		} catch (error) {
+			console.error('Erro ao buscar ordens:', error);
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
 	useEffect(() => {
@@ -46,16 +64,38 @@ export default function ListOrders() {
 				setIsReady(true);
 				clearInterval(interval);
 			}
-		}, 100); // checa a cada 100ms
+		}, 100);
 
 		return () => clearInterval(interval);
 	}, []);
 
 	useEffect(() => {
 		if (isReady) {
-			getOrders();
+			getOrders(1, true); // Carrega a primeira página ao iniciar
 		}
 	}, [isReady]);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			if (
+				window.innerHeight + document.documentElement.scrollTop >=
+					document.documentElement.offsetHeight - 200 &&
+				hasMore &&
+				!isLoading
+			) {
+				getOrders(page);
+			}
+		};
+
+		window.addEventListener('scroll', handleScroll);
+		return () => window.removeEventListener('scroll', handleScroll);
+	}, [page, hasMore, isLoading, searchTerm]);
+
+	const handleSearch = () => {
+		setPage(1);
+		setHasMore(true);
+		getOrders(1, true);
+	};
 
 	return (
 		<>
@@ -69,27 +109,27 @@ export default function ListOrders() {
 					/>
 					<button
 						className="btn btn-primary mx-2 d-flex justify-content-center align-items-center"
-						onClick={getOrders}
+						onClick={handleSearch}
 					>
 						<IoSearch />
 					</button>
 				</div>
+
 				{orders.map((order) => (
 					<CardOrder
 						key={order.id}
 						id={order.id}
-						address={
-							order.address +
-							' ' +
-							order.neighborhood +
-							' ' +
-							order.city +
-							' ' +
-							order.state
-						}
+						address={`${order.address} ${order.neighborhood} ${order.city} ${order.state}`}
 						order={order.qr_code}
 					/>
 				))}
+
+				{isLoading && <p className="text-center mt-3">Carregando...</p>}
+				{!hasMore && (
+					<p className="text-center mt-3">
+						Nenhuma ordem adicional encontrada.
+					</p>
+				)}
 			</div>
 		</>
 	);
