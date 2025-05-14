@@ -79,16 +79,12 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({
 					'Content-Type': 'multipart/form-data',
 				},
 			})
-			.then((res) => res.json())
-			.then((data) => {
-				const previewUrl =
-					previewBaseUrl && data?.filename
-						? `${previewBaseUrl}/${data.filename}`
-						: URL.createObjectURL(imageBlob);
+			.then((response) => {
+				const previewUrl = `${previewBaseUrl}${response.data.file}`;
 
 				setPhoto(previewUrl);
-				onUploadSuccess?.(data);
-				onCapture(previewUrl);
+				onUploadSuccess?.(response.data);
+				onCapture(response.data.file);
 			})
 			.catch((err) => {
 				console.error('Erro no upload:', err);
@@ -169,6 +165,7 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({
 			>
 				{/* Botão de tirar foto */}
 				<button
+					type="button"
 					onClick={takePhoto}
 					style={{
 						padding: 0,
@@ -242,12 +239,14 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({
 							/>
 							<div className="d-flex justify-content-between">
 								<button
+									type="button"
 									onClick={() => setPhoto('')}
 									style={{ marginTop: '10px', padding: '8px 16px' }}
 								>
 									Voltar
 								</button>
 								<button
+									type="button"
 									onClick={sendToServer}
 									style={{ marginTop: '10px', padding: '8px 16px' }}
 								>

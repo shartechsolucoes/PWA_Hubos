@@ -42,17 +42,12 @@ export default function FormOrders() {
 
 	const steps = createSteps(isOnline);
 
-	const {
-		canProceedToStep,
-		photosSkipped,
-		setPhotosSkipped,
-		goToSubmit,
-		setGoToSubmit,
-	} = useSkipPhotoSteps({
-		steps,
-		currentStep,
-		isOnline,
-	});
+	const { canProceedToStep, photosSkipped, setPhotosSkipped, goToSubmit } =
+		useSkipPhotoSteps({
+			steps,
+			currentStep,
+			isOnline,
+		});
 
 	// useEffect(() => {
 	// 	if (goToSubmit) {
@@ -213,7 +208,7 @@ export default function FormOrders() {
 						{steps[currentStep].id === 'PHOTOSTART' && !photosSkipped && (
 							<CameraCapture
 								uploadUrl={`/order/start-work-photo?&os=${formData.qr_code}`}
-								previewBaseUrl="/uploads"
+								previewBaseUrl={import.meta.env.VITE_API_URL}
 								onCapture={(url) =>
 									setFormData((prev: any) => ({ ...prev, photoStartWork: url }))
 								}
@@ -223,7 +218,7 @@ export default function FormOrders() {
 						{steps[currentStep].id === 'PHOTOEND' && !photosSkipped && (
 							<CameraCapture
 								uploadUrl={`/order/end-work-photo?&os=${formData.qr_code}`}
-								previewBaseUrl="/uploads"
+								previewBaseUrl={import.meta.env.VITE_API_URL}
 								onCapture={(url) =>
 									setFormData((prev: any) => ({ ...prev, photoEndWork: url }))
 								}
