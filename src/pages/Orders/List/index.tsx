@@ -26,11 +26,11 @@ export default function ListOrders() {
 
 	const [isReady, setIsReady] = useState(false);
 	const [searchTerm, setSearchTerm] = useState('');
-	const [page, setPage] = useState(1);
+	const [page, setPage] = useState(0);
 	const [hasMore, setHasMore] = useState(true);
 	const [isLoading, setIsLoading] = useState(false);
 
-	const getOrders = async (pageToLoad = 1, reset = false) => {
+	const getOrders = async (pageToLoad = 0, reset = false) => {
 		if (isLoading) return;
 		setIsLoading(true);
 
@@ -71,7 +71,7 @@ export default function ListOrders() {
 
 	useEffect(() => {
 		if (isReady) {
-			getOrders(1, true); // Carrega a primeira página ao iniciar
+			getOrders(0, true); // Carrega a primeira página ao iniciar
 		}
 	}, [isReady]);
 
@@ -92,9 +92,10 @@ export default function ListOrders() {
 	}, [page, hasMore, isLoading, searchTerm]);
 
 	const handleSearch = () => {
-		setPage(1);
+		setOrders([]);
+		setPage(0);
 		setHasMore(true);
-		getOrders(1, true);
+		getOrders(0, true);
 	};
 
 	return (
