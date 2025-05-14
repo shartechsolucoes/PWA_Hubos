@@ -6,6 +6,7 @@ import { useSearchParams } from 'react-router';
 import { KitType, OrderType } from './types';
 import KitCard from '../../../components/KitCard/KitCard.tsx';
 import { format } from 'date-fns';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 export default function InfoOrders() {
 	const [searchParams] = useSearchParams();
@@ -31,6 +32,8 @@ export default function InfoOrders() {
 		photoEndWork: '',
 		ordersKits: [],
 	});
+
+	const apiKey = 'AIzaSyCLYeK1ksPfWhPxgZZ687Vdi-eDFLFRCr0';
 
 	const [kits, setKits] = useState<KitType[]>([
 		{
@@ -92,7 +95,33 @@ export default function InfoOrders() {
 					</div>
 
 					<div className="col-12">
-						<div className="map box-shadow"></div>
+						<div className="map ">
+							<LoadScript googleMapsApiKey={apiKey}>
+								<GoogleMap
+									mapContainerStyle={{ width: '100%', height: '250px' }}
+									center={{
+										lat: parseFloat(order?.lat || '-15.7801'),
+										lng: parseFloat(order?.long || '-47.9292'),
+									}}
+									zoom={12}
+									options={{
+										disableDefaultUI: true, // Remove todos os controles padrão
+										zoomControl: false, // Especificamente remove o controle de zoom
+										streetViewControl: false, // Remove o botão do Street View
+										mapTypeControl: false, // Remove o botão de tipo de mapa (satélite, etc.)
+										fullscreenControl: false, // Remove o botão de fullscreen
+									}}
+								>
+									<Marker
+										position={{
+											lat: parseFloat(order.lat),
+											lng: parseFloat(order.long),
+										}}
+										title={`Pedido #${order.id}`}
+									/>
+								</GoogleMap>
+							</LoadScript>
+						</div>
 					</div>
 					<div className="map-data col-12 mt-2">
 						<p className="fs-6">

@@ -9,10 +9,9 @@
 .map {
     background: #eaeaea;
     margin: auto;
-    height: 150px;
+    height: 250px;
     border-radius: 10px;
-    background-image: url("https://guiamapa.com/mapas/cidades/rs/mapa-bom-principio.png");
-    background-size: cover;
+    overflow: hidden;
 }
 
 
