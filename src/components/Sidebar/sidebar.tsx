@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 import { IoIosArrowBack } from 'react-icons/io';
-import { Link, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { getFirstLetter } from '../../utils/getFirstLetter';
 
 export default function Dashboard() {
-	const [toggleDropdown, setToggleDropdown] = useState(false);
+	// const [toggleDropdown, setToggleDropdown] = useState(false);
 	const navigate = useNavigate();
 
 	const [user, setUser] = useState({ name: '', avatar: '' });
@@ -30,7 +30,7 @@ export default function Dashboard() {
 					<a
 						className="nav-link dropdown-toggle hide-arrow "
 						data-bs-toggle="dropdown"
-						onClick={() => setToggleDropdown((prev) => !prev)}
+						// onClick={() => setToggleDropdown((prev) => !prev)}
 					>
 						<div className="avatar">
 							{!user.avatar ? (
@@ -40,7 +40,7 @@ export default function Dashboard() {
 							)}
 						</div>
 					</a>
-					<ul
+					{/* <ul
 						className={`dropdown-menu dropdown-menu-end drop-menu ${
 							toggleDropdown && 'show'
 						}`}
@@ -60,7 +60,7 @@ export default function Dashboard() {
 								<span className="align-middle">Sair</span>
 							</a>
 						</li>
-					</ul>
+					</ul> */}
 				</div>
 			</div>
 		</div>

@@ -12,6 +12,7 @@ import { useOnlineStatus } from '../../../utils/useOnlineStatus.ts';
 import { useAppStore } from '../../../utils/store.ts';
 import { createSubmission } from '../../../utils/createSubmission.ts';
 import { useSkipPhotoSteps } from '../../../utils/useSkipPhotoSteps.ts';
+import Resume from './Resume/Resume.tsx';
 
 const createSteps = (isOnline: boolean) => [
 	{ id: 'QRCODE', title: 'QR Code' },
@@ -225,15 +226,16 @@ export default function FormOrders() {
 							/>
 						)}
 
-						{steps[currentStep].id === 'OFFLINE' && (
+						{steps[currentStep].id === 'SUBMIT' && photosSkipped && (
 							<div className="offline-warning">
-								<h4>Você está offline</h4>
+								<h4>Você ficou offline</h4>
 								<p>As etapas de foto foram puladas devido à conexão.</p>
-								<p>
-									Se estiver tudo pronto, clique em Enviar para salvar os dados
-									localmente.
-								</p>
+								<p>Se estiver tudo pronto, clique em Enviar para salvar.</p>
 							</div>
+						)}
+
+						{steps[currentStep].id === 'SUBMIT' && (
+							<Resume data={formData} kits={availableKits} />
 						)}
 
 						<div className="d-flex flex-row-reverse justify-content-between">

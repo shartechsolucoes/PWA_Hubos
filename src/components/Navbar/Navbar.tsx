@@ -1,9 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { IoIosLogOut, IoMdAdd } from 'react-icons/io';
+import { IoMdAdd } from 'react-icons/io';
 import { GoHome } from 'react-icons/go';
 import { CiCircleList, CiUser } from 'react-icons/ci';
 import './style.css';
 import { Link } from 'react-router';
+import LogoutModal from './LogoutModal/LogoutModal';
 
 export default function Navbar() {
 	return (
@@ -34,9 +35,10 @@ export default function Navbar() {
 							</Link>
 						</div>
 						<div className="col-3 item text-center">
-							<Link to="/">
+							<LogoutModal />
+							{/* <Link to="/" onClick={() => localStorage.clear()}>
 								<IoIosLogOut />{' '}
-							</Link>
+							</Link> */}
 						</div>
 					</div>
 				</div>

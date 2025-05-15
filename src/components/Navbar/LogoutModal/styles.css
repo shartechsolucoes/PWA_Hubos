@@ -1,0 +1,74 @@
+/* Fundo escuro semitransparente */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(67, 71, 84, 0.75);
+  /* um azul escuro transparente */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Caixa do modal com fundo em degradê azul */
+.modal-content {
+  background: linear-gradient(135deg, #1a73e8, #2a4d8f);
+  /* degradê azul */
+  padding: 30px 40px;
+  border-radius: 16px;
+  max-width: 360px;
+  width: 90%;
+  box-shadow: 0 8px 20px rgba(10, 25, 70, 0.7);
+  text-align: center;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  gap: 8px;
+}
+
+/* Texto da mensagem */
+.modal-content p {
+  font-size: 20px;
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+/* Botões do modal */
+.modal-content button {
+  margin: 0 10px;
+  padding: 12px 28px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* Botão confirmar (Sim) em azul claro */
+.modal-content button:first-of-type {
+  background-color: #4dabf7;
+  color: #0d1f40;
+  box-shadow: 0 5px 15px #4dabf7aa;
+}
+
+.modal-content button:first-of-type:hover {
+  background-color: #74b9ff;
+  transform: scale(1.05);
+}
+
+/* Botão cancelar (Não) em azul escuro */
+.modal-content button:last-of-type {
+  background-color: #0d1f40;
+  color: #9bbcf9;
+  box-shadow: 0 5px 15px #0d1f40aa;
+}
+
+.modal-content button:last-of-type:hover {
+  background-color: #192d58;
+  color: white;
+  transform: scale(1.05);
+}

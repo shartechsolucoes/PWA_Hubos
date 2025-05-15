@@ -1,10 +1,9 @@
 import './style.css';
-import { BsFillPencilFill, BsPinMap } from 'react-icons/bs';
+import { BsPinMap } from 'react-icons/bs';
 import { IoPhonePortraitOutline } from 'react-icons/io5';
 import { CiMail } from 'react-icons/ci';
 import { useEffect, useState } from 'react';
 import { api } from '../../../utils/api.ts';
-import { Link } from 'react-router';
 
 export default function InfoUser() {
 	const [user, setUser] = useState({
@@ -35,11 +34,11 @@ export default function InfoUser() {
 				<div className="info d-block text-center">
 					<div className="avatar_user align-content-center">
 						<img src={`${import.meta.env.VITE_API_URL}${user.picture}`} />
-						<div className="edit">
+						{/* <div className="edit">
 							<Link to="/user/form">
 								<BsFillPencilFill />
 							</Link>
-						</div>
+						</div> */}
 					</div>
 
 					<h2>{user.name}</h2>
