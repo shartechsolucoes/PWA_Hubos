@@ -8,7 +8,6 @@ interface DeferredPromptEvent extends Event {
 }
 
 const InstallPWAButton: React.FC = () => {
-
 	// const [isInstallable, setIsInstallable] = useState<boolean>(false);
 	const [deferredPrompt, setDeferredPrompt] =
 		useState<DeferredPromptEvent | null>(null);
