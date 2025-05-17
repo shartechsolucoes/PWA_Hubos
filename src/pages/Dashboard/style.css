@@ -12,3 +12,35 @@ body {
 .view {
     margin-bottom: 4em;
 }
+
+
+.container-card {
+    padding-top: 1em;
+    border-radius: 24px 24px 0 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 60vh;
+    background-color: white;
+    padding: 0;
+    box-shadow: 0 -4px 20px 8px rgba(0, 0, 0, 0.2);
+}
+
+.container-card::before {
+    content: ' ';
+    position: absolute;
+    top: .8em;
+    left: calc(50% - 24px);
+    border: 2px solid rgb(221, 221, 221);
+    border-radius: 2px;
+    width: 50px;
+}
+
+
+.inside-scroll {
+    overflow-y: scroll;
+    height: 50vh;
+    margin-top: 2em !important;
+    padding-bottom: 2em !important;
+    padding: 12px;
+}

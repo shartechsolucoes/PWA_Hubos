@@ -66,15 +66,17 @@ export default function Dashboard() {
 		<>
 			<div className="container view">
 				<div className="row">
-					<div className="col-12 mt-3">
-						<h1 className="color-primary">Bem Vindo</h1>
-						<h2>{userName}</h2>
-					</div>
-
-					<div className="col-12 mt-3">
+					<div
+						className="col-12 mt-3"
+						style={{ position: 'fixed', top: 0, right: 0, width: '100vw' }}
+					>
 						<LoadScript googleMapsApiKey={apiKey}>
 							<GoogleMap
-								mapContainerStyle={{ width: '100%', height: '250px' }}
+								mapContainerStyle={{
+									width: '100vw',
+									height: '50vh',
+									left: '-3vw',
+								}}
 								center={{
 									lat: parseFloat(orders[0]?.lat || '-15.7801'),
 									lng: parseFloat(orders[0]?.long || '-47.9292'),
@@ -101,27 +103,28 @@ export default function Dashboard() {
 							</GoogleMap>
 						</LoadScript>
 					</div>
-					<div className="col-12 mt-3">
-						{orders.map((order) => (
-							<CardOrder
-								key={order.id}
-								id={order.id}
-								address={
-									order.address +
-									' ' +
-									order.neighborhood +
-									' ' +
-									order.city +
-									' ' +
-									order.state
-								}
-								order={order.qr_code}
-							/>
-						))}
+					<div className="container-card">
+						<div className="col-12 mt-3 inside-scroll">
+							{orders.map((order) => (
+								<CardOrder
+									key={order.id}
+									id={order.id}
+									address={
+										order.address +
+										' ' +
+										order.neighborhood +
+										' ' +
+										order.city +
+										' ' +
+										order.state
+									}
+									order={order.qr_code}
+								/>
+							))}
+						</div>
 					</div>
 				</div>
 			</div>
-			<div></div>
 		</>
 	);
 }
