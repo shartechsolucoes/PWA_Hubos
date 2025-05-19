@@ -1,15 +1,31 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 import { IoIosArrowBack } from 'react-icons/io';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { getFirstLetter } from '../../utils/getFirstLetter';
 
 export default function Dashboard() {
 	// const [toggleDropdown, setToggleDropdown] = useState(false);
 	const navigate = useNavigate();
+	const location = useLocation();
 
 	const [user, setUser] = useState({ name: '', avatar: '' });
+
+	const pageTitle = useMemo(() => {
+		switch (location.pathname) {
+			case '/dashboard':
+				return 'Dashboard';
+			case '/orders':
+				return 'Ordens de serviço';
+			case '/orders/form':
+				return 'Nova OS';
+			case '/user/info':
+				return 'Informações';
+			default:
+				return 'Página';
+		}
+	}, [location.pathname]);
 
 	useEffect(() => {
 		setUser({
@@ -18,13 +34,13 @@ export default function Dashboard() {
 		});
 	}, []);
 	return (
-		<div className="sidebar">
+		<div className="sidebar box-shadow">
 			<div className="row">
 				<a onClick={() => navigate(-1)} className="col-2">
 					<IoIosArrowBack />
 				</a>
 				<div className="col-8 text-center">
-					<h2 className="mt-1">Dashboard</h2>
+					<h2 className="mt-1">{pageTitle}</h2>
 				</div>
 				<div className="col-2">
 					<a

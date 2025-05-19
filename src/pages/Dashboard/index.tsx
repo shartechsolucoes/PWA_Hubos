@@ -67,7 +67,7 @@ export default function Dashboard() {
 			<div className="container view">
 				<div className="row">
 					<div
-						className="col-12 mt-3"
+						className="col-12"
 						style={{ position: 'fixed', top: 0, right: 0, width: '100vw' }}
 					>
 						<LoadScript googleMapsApiKey={apiKey}>
