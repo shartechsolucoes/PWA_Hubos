@@ -1,5 +1,21 @@
 body {
   margin: 0;
+  background-color: var(--color-bg) !important;
+  color: var(--color-text-primary) !important;
+}
+
+:root {
+  /* Cores principais do tema */
+  --color-bg: #f4f6f8;
+  /* Fundo do app */
+  --color-text-primary: #212121;
+  /* Texto primário */
+  --color-text-secondary: #616161;
+  /* Texto secundário */
+  --color-card: #e3f2fd;
+  /* Fundo dos cards (OS) */
+  --color-accent: #1976d2;
+  /* Azul destaque (ações, ícones etc.) */
 }
 
 .color-primary {
@@ -9,14 +25,6 @@ body {
 .btn-primary {
   background: #2e52a3 !important;
 }
-
-/*.form-control{*/
-/*  border: 0px !important;*/
-/*  background: #dfdede !important;*/
-/*  font-size: 12px !important;*/
-/*  line-height: 12px !important;*/
-/*  height: 35px;*/
-/*}*/
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,

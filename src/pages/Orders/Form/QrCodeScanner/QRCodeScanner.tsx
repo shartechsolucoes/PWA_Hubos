@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Html5Qrcode } from 'html5-qrcode';
 import { BsQrCodeScan } from 'react-icons/bs';
 
+import './styles.css';
+
 export default function QRCodeScanner({
 	onScan,
 	value = '',
@@ -54,15 +56,16 @@ export default function QRCodeScanner({
 				<div
 					id="qr-reader"
 					ref={scannerRef}
-					style={{ width: '100%', borderRadius: '16px', overflow: 'hidden' }}
+					className="qr-preview"
+					// style={{ width: '100%', borderRadius: '16px', overflow: 'hidden' }}
 				></div>
 			</div>
 
 			<div className="col-12">
-				<div className="input-group mt-2">
+				<div className="input-group mt-2 qr-input">
 					<input
 						type="text"
-						className="form-control"
+						className="form-control "
 						placeholder="QR Code"
 						value={scannedCode}
 						onChange={(e) => {
@@ -72,8 +75,8 @@ export default function QRCodeScanner({
 						}}
 					/>
 					<div className="input-group-prepend">
-						<div className="input-group-text">
-							<BsQrCodeScan />
+						<div className="input-group-text qr-icon">
+							<BsQrCodeScan size={24} />
 						</div>
 					</div>
 				</div>

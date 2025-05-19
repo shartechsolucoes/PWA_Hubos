@@ -5,3 +5,27 @@
     margin: auto;
     overflow-y: hidden;
 }
+
+
+.step-guide {
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+    margin: 12px 0 4px 0;
+}
+
+
+.button-next {
+    padding: 10px 24px;
+    background-color: var(--color-accent);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 1rem;
+    align-self: flex-end;
+    transition: background 0.2s;
+}
+
+.button-next:hover {
+    background-color: #115bb2;
+}

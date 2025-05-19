@@ -104,12 +104,12 @@ export default function ListOrders() {
 				<div className="d-flex align-content-end">
 					<input
 						placeholder="Pesquisar OS"
-						className="form-control"
+						className="form-control search"
 						value={searchTerm}
 						onChange={(e) => setSearchTerm(e.target.value)}
 					/>
 					<button
-						className="btn btn-primary mx-2 d-flex justify-content-center align-items-center"
+						className="btn search-button mx-2 my-0 d-flex justify-content-center align-items-center"
 						onClick={handleSearch}
 					>
 						<IoSearch />

@@ -242,7 +242,7 @@ export default function FormOrders() {
 							{currentStep < steps.length - 1 && (
 								<button
 									type="button"
-									className="mt-3 btn btn-dark next"
+									className="mt-3 button-next"
 									onClick={handleNext}
 								>
 									Próximo

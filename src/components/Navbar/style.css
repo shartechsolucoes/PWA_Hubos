@@ -1,22 +1,22 @@
-.navbar{
-    position:fixed;
+.navbar {
+    position: fixed;
     bottom: 0px;
     left: 0;
     right: 0;
-    margin:0 0px ;
+    margin: 0 0px;
     padding: 15px 10px;
     border-radius: 20px 20px 0 0;
     background: #07AAE8;
-    background: linear-gradient(90deg,rgba(7, 170, 232, 1) 0%, rgba(46, 83, 164, 1) 74%);
+    background: linear-gradient(90deg, rgba(7, 170, 232, 1) 0%, rgba(46, 83, 164, 1) 74%);
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.navbar .item{
+.navbar .item {
     color: #ffffff;
 }
-.navbar .item a{
+
+.navbar .item a {
     color: #ffffff;
-    font-size:20px;
+    font-size: 20px;
     line-height: 0;
 }
-
-

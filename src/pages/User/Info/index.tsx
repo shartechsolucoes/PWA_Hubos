@@ -30,7 +30,7 @@ export default function InfoUser() {
 
 	return (
 		<>
-			<div className="container mt-5">
+			<div className="container mt-5 profile-container ">
 				<div className="info d-block text-center">
 					<div className="avatar_user align-content-center">
 						<img src={`${import.meta.env.VITE_API_URL}${user.picture}`} />
@@ -41,9 +41,9 @@ export default function InfoUser() {
 						</div> */}
 					</div>
 
-					<h2>{user.name}</h2>
+					<h2 className="user-name">{user.name}</h2>
 				</div>
-				<div className="row d-block text-center">
+				<div className="row d-block text-center info-block">
 					<div className="col-4"></div>
 					<div className="mt-3">
 						<CiMail />
