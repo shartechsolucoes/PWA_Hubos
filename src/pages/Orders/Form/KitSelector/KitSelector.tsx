@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
+import './styles.css';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+
 type Material = {
 	id: number;
 	description: string;
@@ -83,7 +86,7 @@ const KitSelector: React.FC<Props> = ({ kits, value = [], onSelect }) => {
 
 					return (
 						<li key={kit.id} className="list-group-item">
-							<div className="d-flex justify-content-between align-items-center">
+							<div className="d-flex justify-content-between align-items-center kit-title">
 								<div className="form-check">
 									<input
 										className="form-check-input"
@@ -99,33 +102,38 @@ const KitSelector: React.FC<Props> = ({ kits, value = [], onSelect }) => {
 										{kit.description}
 									</label>
 								</div>
-
-								{selected && (
-									<input
-										type="text"
-										className="form-control form-control-sm w-25 mx-2"
-										value={
-											selectedKits.find((k) => k.kit_id === kit.id)?.quantity ??
-											''
-										}
-										onChange={(e) => {
-											const value = e.target.value;
-											if (/^\d*$/.test(value)) {
-												handleQuantityChange(kit.id, value);
+								<span>
+									{selected && (
+										<input
+											type="text"
+											className="input-quantidade mx-2"
+											value={
+												selectedKits.find((k) => k.kit_id === kit.id)
+													?.quantity ?? ''
 											}
-										}}
-										inputMode="numeric"
-										pattern="[0-9]*"
-									/>
-								)}
+											onChange={(e) => {
+												const value = e.target.value;
+												if (/^\d*$/.test(value)) {
+													handleQuantityChange(kit.id, value);
+												}
+											}}
+											inputMode="numeric"
+											pattern="[0-9]*"
+										/>
+									)}
 
-								<button
-									type="button"
-									className="btn btn-sm btn-outline-secondary"
-									onClick={() => toggleExpand(kit.id)}
-								>
-									{expandedKits.includes(kit.id) ? '−' : '+'}
-								</button>
+									<button
+										type="button"
+										className="btn mt-0 btn-sm  "
+										onClick={() => toggleExpand(kit.id)}
+									>
+										{expandedKits.includes(kit.id) ? (
+											<IoIosArrowUp />
+										) : (
+											<IoIosArrowDown />
+										)}
+									</button>
+								</span>
 							</div>
 
 							{expandedKits.includes(kit.id) && (

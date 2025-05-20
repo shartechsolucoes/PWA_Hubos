@@ -36,13 +36,13 @@ export default function Dashboard() {
 	return (
 		<div className="sidebar box-shadow">
 			<div className="row">
-				<a onClick={() => navigate(-1)} className="col-2">
+				<a onClick={() => navigate(-1)} className="col-2 return-button">
 					<IoIosArrowBack />
 				</a>
 				<div className="col-8 text-center">
 					<h2 className="mt-1">{pageTitle}</h2>
 				</div>
-				<div className="col-2">
+				<div className="col-2 ">
 					<a
 						className="nav-link dropdown-toggle hide-arrow "
 						data-bs-toggle="dropdown"

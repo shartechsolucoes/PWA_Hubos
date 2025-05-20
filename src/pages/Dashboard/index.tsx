@@ -28,7 +28,7 @@ export default function Dashboard() {
 	>([]);
 	const apiKey = 'AIzaSyCLYeK1ksPfWhPxgZZ687Vdi-eDFLFRCr0';
 
-	const [userName, setUserName] = useState('');
+	// const [userName, setUserName] = useState('');
 	const [isReady, setIsReady] = useState(false);
 
 	const getOrders = async () => {
@@ -58,7 +58,7 @@ export default function Dashboard() {
 	useEffect(() => {
 		if (isReady) {
 			getOrders();
-			setUserName(localStorage.getItem('userName') || '');
+			// setUserName(localStorage.getItem('userName') || '');
 		}
 	}, [isReady]);
 

@@ -26,6 +26,39 @@
     transition: background 0.2s;
 }
 
+.button-return {
+    padding: 10px 24px;
+    background-color: var(--color-text-secondary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 1rem;
+    align-self: flex-end;
+    transition: background 0.2s;
+}
+
 .button-next:hover {
     background-color: #115bb2;
+}
+
+
+.button-clean {
+    background-color: transparent;
+    border: none;
+    color: var(--color-accent);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.button-clean:hover {
+    background-color: transparent;
+    /* leve highlight */
+}
+
+.button-clean:focus {
+    outline: none;
+    box-shadow: none;
 }

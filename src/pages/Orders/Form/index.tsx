@@ -250,7 +250,7 @@ export default function FormOrders() {
 							)}
 
 							{currentStep === steps.length - 1 && (
-								<button type="submit" className="mt-3 btn btn-dark submit">
+								<button type="submit" className="mt-3 btn btn-dark submit ">
 									Enviar
 								</button>
 							)}
@@ -258,7 +258,7 @@ export default function FormOrders() {
 							{currentStep > 0 && (
 								<button
 									type="button"
-									className="mt-3 btn btn-dark next"
+									className="button-clean"
 									onClick={handlePreview}
 								>
 									Voltar

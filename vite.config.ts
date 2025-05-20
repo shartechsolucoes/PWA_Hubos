@@ -16,8 +16,8 @@ export default defineConfig({
 				name: 'GeoOS',
 				short_name: 'GeoOS',
 				description: 'PWA for Hubos application, to install on smartphones',
-				theme_color: '#ffffff',
-				background_color: '#ffffff',
+				theme_color: '#f4f6f8',
+				background_color: '#f4f6f8',
 				start_url: '/',
 				display: 'standalone',
 				icons: [

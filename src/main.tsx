@@ -1,7 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import { BrowserRouter, Route, Routes } from 'react-router';
-import InstallPWAButton from './components/installPWA/InstalPWA.tsx';
 import Login from './pages/Login/index.tsx';
 import Dashboard from './pages/Dashboard/index.tsx';
 import ListOrders from './pages/Orders/List/index.tsx';

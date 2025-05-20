@@ -21,3 +21,9 @@
 .dropdown-toggle::after {
     display: none;
 }
+
+.return-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
