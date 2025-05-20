@@ -250,7 +250,7 @@ export default function FormOrders() {
 							)}
 
 							{currentStep === steps.length - 1 && (
-								<button type="submit" className="mt-3 btn btn-dark submit ">
+								<button type="submit" className="mt-3  button-next ">
 									Enviar
 								</button>
 							)}

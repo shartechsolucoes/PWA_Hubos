@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as exifr from 'exifr';
 import { FaCamera } from 'react-icons/fa';
 import { api } from '../../../../utils/api';
+import styles from './styles.module.css'; // import do CSS module
 
 interface CameraCaptureProps {
 	uploadUrl: string;
 	previewBaseUrl?: string;
-	onCapture: (url: string) => void; // ✅ NOVA PROP OBRIGATÓRIA
+	onCapture: (url: string) => void;
 	onUploadSuccess?: (data: any) => void;
 	onUploadError?: (error: any) => void;
 }
@@ -81,7 +82,6 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({
 			})
 			.then((response) => {
 				const previewUrl = `${previewBaseUrl}${response.data.file}`;
-
 				setPhoto(previewUrl);
 				onUploadSuccess?.(response.data);
 				onCapture(response.data.file);
@@ -154,102 +154,43 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({
 
 	return (
 		<div className="fields row">
-			<div
-				className="codeRead d-flex"
-				style={{
-					position: 'relative',
-					overflow: 'hidden',
-					width: '100%',
-					padding: '1em',
-				}}
-			>
-				{/* Botão de tirar foto */}
+			<div className={styles['camera-wrapper']}>
 				<button
 					type="button"
 					onClick={takePhoto}
-					style={{
-						padding: 0,
-						position: 'absolute',
-						bottom: '20px',
-						left: '50%',
-						transform: 'translateX(-50%)',
-						zIndex: 10,
-						borderRadius: '50%',
-						height: '80px',
-						width: '80px',
-						backgroundColor: '#fff',
-						border: '2px solid #ccc',
-						display: 'flex',
-						alignItems: 'center',
-						justifyContent: 'center',
-						boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
-						background:
-							'linear-gradient(90deg, rgba(7, 170, 232, 1) 0%, rgba(46, 83, 164, 1) 74%)',
-					}}
+					className={styles['camera-button']}
 				>
 					<FaCamera style={{ fontSize: '32px' }} color="#fff" />
 				</button>
 
-				{/* Vídeo ao fundo */}
 				<div style={{ flex: 1, minWidth: '50%' }}>
 					<video
 						ref={videoRef}
 						autoPlay
 						playsInline
 						muted
-						style={{
-							width: '100%',
-							borderRadius: '10px',
-							height: '90%',
-							objectFit: 'cover',
-						}}
+						className={styles['camera-video']}
 					/>
 					<canvas ref={canvasRef} style={{ display: 'none' }} />
 				</div>
 
-				{/* Pré-visualização animada */}
 				<div
-					className={`preview-slide ${photo ? 'active' : ''}`}
-					style={{
-						position: 'absolute',
-						top: 0,
-						right: 0,
-						width: '100%',
-						height: '100%',
-						transition: 'transform 0.6s ease',
-						transform: photo ? 'translateX(0)' : 'translateX(100%)',
-						backgroundColor: '#fff',
-						borderRadius: '10px',
-						padding: '10px',
-						boxShadow: '0 0 20px rgba(0,0,0,0.2)',
-						zIndex: 10,
-					}}
+					className={`${styles['preview-slide']} ${
+						photo ? styles['active'] : ''
+					}`}
 				>
 					{photo && (
 						<>
 							<img
 								src={photo}
 								alt="Foto capturada"
-								style={{
-									width: '100%',
-									borderRadius: '10px',
-									height: '86%',
-									objectFit: 'cover',
-								}}
+								className={styles['preview-image']}
 							/>
-							<div className="d-flex justify-content-between">
-								<button
-									type="button"
-									onClick={() => setPhoto('')}
-									style={{ marginTop: '10px', padding: '8px 16px' }}
-								>
+							<div className={styles['preview-buttons']}>
+								<button type="button" onClick={() => setPhoto('')}>
 									Voltar
 								</button>
-								<button
-									type="button"
-									onClick={sendToServer}
-									style={{ marginTop: '10px', padding: '8px 16px' }}
-								>
+								<button type="button" onClick={sendToServer}>
 									Enviar
 								</button>
 							</div>

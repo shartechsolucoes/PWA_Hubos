@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import { BsQrCodeScan } from 'react-icons/bs';
 import KitCard from '../../../../components/KitCard/KitCard';
+import styles from './Resume.module.css';
 
 type ResumeProps = {
 	data: {
@@ -15,7 +16,7 @@ type ResumeProps = {
 		observations?: string;
 		lat?: string;
 		long?: string;
-		ordersKits?: any[]; // ajuste conforme estrutura real
+		ordersKits?: any[];
 	};
 	kits: any;
 };
@@ -24,37 +25,36 @@ export default function Resume({ data, kits }: ResumeProps) {
 	if (!data) return null;
 
 	return (
-		<div className="container">
-			<div className="row d-flex flex-column gap-3">
-				<div className="d-flex gap-3 align-items-center">
-					<div className="qrcode d-flex rounded-1 p-2 bg-light">
+		<div className={styles.container}>
+			<div className={styles.contentWrapper}>
+				<div className={styles.qrSection}>
+					<div className={styles.qrcodeWrapper}>
 						<BsQrCodeScan size={32} />
 					</div>
 					<div>
-						<h5 className="mb-1">{data.qr_code}</h5>
-						<p className="mb-0 text-muted">
+						<h5 className={styles.qrCodeText}>{data.qr_code}</h5>
+						<p className={styles.dateText}>
 							{format(new Date(), 'dd/MM/yyyy')}
 						</p>
 					</div>
 				</div>
-				<div className="map-data col-12">
-					<p className="fs-6 text-secondary">
+				<div className={styles.addressBlock}>
+					<p className={styles.addressText}>
 						{`${data.address}, ${data.neighborhood}, ${data.city} - ${data.state}`}
 					</p>
 				</div>
-				<div className="col-12 d-flex flex-column gap-1">
-					<p className="fs-6">
+				<div className={styles.protocolBlock}>
+					<p>
 						<strong>N° Protocolo:</strong> {data.protocolNumber || '—'}
 					</p>
-					<p className="fs-6">
+					<p>
 						<strong>OBS:</strong> {data.observations || '—'}
 					</p>
 				</div>
-				<div className="col-12 mt-3">
-					<p className="fs-6 fw-bold">Kits</p>
+				<div className={styles.kitsTitleBlock}>
+					<p className={styles.kitsTitle}>Kits</p>
 				</div>
-
-				<div className="kits col-12 d-flex flex-column gap-2">
+				<div className={styles.kitsList}>
 					{kits?.length > 0 ? (
 						kits
 							.filter((kit: any) =>
@@ -74,7 +74,7 @@ export default function Resume({ data, kits }: ResumeProps) {
 								);
 							})
 					) : (
-						<p className="text-muted">Nenhum kit cadastrado.</p>
+						<p className={styles.noKitText}>Nenhum kit cadastrado.</p>
 					)}
 				</div>
 			</div>
