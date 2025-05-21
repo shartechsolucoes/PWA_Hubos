@@ -3,6 +3,7 @@ import * as exifr from 'exifr';
 import { FaCamera } from 'react-icons/fa';
 import { api } from '../../../../utils/api';
 import styles from './styles.module.css'; // import do CSS module
+import PhotoSentModal from './PhotSendModal/PhotoSentModal';
 
 interface CameraCaptureProps {
 	uploadUrl: string;
@@ -24,7 +25,7 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({
 	const [photo, setPhoto] = useState<string | null>(null);
 	const [imageBlob, setImageBlob] = useState<Blob | null>(null);
 	const [stream, setStream] = useState<MediaStream | null>(null);
-
+	const [showModal, setShowModal] = useState(false);
 	useEffect(() => {
 		const startCamera = async () => {
 			try {
@@ -85,6 +86,7 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({
 				setPhoto(previewUrl);
 				onUploadSuccess?.(response.data);
 				onCapture(response.data.file);
+				setShowModal(true);
 			})
 			.catch((err) => {
 				console.error('Erro no upload:', err);
@@ -154,6 +156,7 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({
 
 	return (
 		<div className="fields row">
+			{showModal && <PhotoSentModal onClose={() => setShowModal(false)} />}
 			<div className={styles['camera-wrapper']}>
 				<button
 					type="button"
