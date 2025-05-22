@@ -1,7 +1,7 @@
 .maps {
     width: 100%;
     background: red;
-    height: 200px;
+    height: 300px;
 }
 
 
@@ -19,25 +19,27 @@
     height: 60vh;
     background-color: var(--color-bg) !important;
     padding: 0;
-    box-shadow: 0 -4px 20px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 -25px 20px -20px rgba(0, 0, 0, 0.2);
 }
 
 .container-card::before {
-    content: ' ';
+    content: '';
     position: absolute;
-    top: .8em;
-    left: calc(50% - 24px);
-    border: 2px solid #ccc;
-    border-radius: 2px;
-    width: 40px;
-    height: 4px;
-    margin: 8px auto;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 5px;
+    background-color: #ccc;
+    border-radius: 10px;
+    cursor: grab;
 }
 
 
 .inside-scroll {
     overflow-y: scroll;
-    height: 50vh;
+    height: calc(100% - 3em);
+    /* ocupa o restante do container */
     margin-top: 2em !important;
     padding-bottom: 2em !important;
     padding: 12px;

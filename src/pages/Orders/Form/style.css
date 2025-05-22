@@ -62,3 +62,13 @@
     outline: none;
     box-shadow: none;
 }
+
+
+.offline-warning {
+    background: #FFF8E1;
+    padding: 12px;
+    border-radius: 8px;
+    color: #444;
+    font-size: 14px;
+    border-left: 4px solid #FFB300;
+}

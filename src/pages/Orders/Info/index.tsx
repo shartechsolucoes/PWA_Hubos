@@ -81,77 +81,68 @@ export default function InfoOrders() {
 		getOrder();
 	}, []);
 	return (
-		<>
-			<div className="container">
-				<div className="row d-flex flex-column gap-1">
-					<div className="d-flex gap-3">
-						<div className="qrcode d-flex rounded-1">
-							<BsQrCodeScan />
-						</div>
-						<div className="col-4">
-							<h1>{order.qr_code}</h1>
-							<p>{format(order.registerDay, 'dd/MM/yyyy')}</p>
-						</div>
+		<div className="container">
+			<div className="card-container">
+				<div className="d-flex gap-3 align-items-center">
+					<div className="qrcode">
+						<BsQrCodeScan />
 					</div>
+					<div>
+						<h4 className="mb-0">{order.qr_code}</h4>
+						<small>{format(order.registerDay, 'dd/MM/yyyy')}</small>
+					</div>
+				</div>
 
-					<div className="col-12">
-						<div className="map ">
-							<LoadScript googleMapsApiKey={apiKey}>
-								<GoogleMap
-									mapContainerStyle={{ width: '100%', height: '250px' }}
-									center={{
-										lat: parseFloat(order?.lat || '-15.7801'),
-										lng: parseFloat(order?.long || '-47.9292'),
-									}}
-									zoom={12}
-									options={{
-										disableDefaultUI: true, // Remove todos os controles padrão
-										zoomControl: false, // Especificamente remove o controle de zoom
-										streetViewControl: false, // Remove o botão do Street View
-										mapTypeControl: false, // Remove o botão de tipo de mapa (satélite, etc.)
-										fullscreenControl: false, // Remove o botão de fullscreen
-									}}
-								>
-									<Marker
-										position={{
-											lat: parseFloat(order.lat),
-											lng: parseFloat(order.long),
-										}}
-										title={`Pedido #${order.id}`}
-									/>
-								</GoogleMap>
-							</LoadScript>
-						</div>
-					</div>
-					<div className="map-data col-12 mt-2">
-						<p className="fs-6">
-							{order.address +
-								' ' +
-								order.neighborhood +
-								' ' +
-								order.city +
-								' ' +
-								order.state}
-						</p>
-					</div>
+				<div className="map mt-3">
+					<LoadScript googleMapsApiKey={apiKey}>
+						<GoogleMap
+							mapContainerStyle={{ width: '100%', height: '100%' }}
+							center={{
+								lat: parseFloat(order?.lat || '-15.7801'),
+								lng: parseFloat(order?.long || '-47.9292'),
+							}}
+							zoom={12}
+							options={{
+								disableDefaultUI: true,
+								zoomControl: false,
+								streetViewControl: false,
+								mapTypeControl: false,
+								fullscreenControl: false,
+							}}
+						>
+							<Marker
+								position={{
+									lat: parseFloat(order.lat),
+									lng: parseFloat(order.long),
+								}}
+								title={`Pedido #${order.id}`}
+							/>
+						</GoogleMap>
+					</LoadScript>
+				</div>
 
-					<div className="col-12 d-flex flex-column gap-2">
-						<p className="fs-6">
-							<strong>N° Protocolo</strong>: {order.protocolNumber}
-						</p>
-						<p className="fs-6">
-							<strong>OBS</strong>: {order.observations}
-						</p>
-					</div>
-					<div className="col-12 mt-3">
-						<p className="fs-6">
-							<strong>Kits</strong>
-						</p>
-					</div>
-					<div className="kits col-12  d-flex flex-column gap-2">
+				<div className="map-data">
+					{order.address} {order.neighborhood}, {order.city} - {order.state}
+				</div>
+
+				<div className="mt-3">
+					<p>
+						<span className="info-label">Nº Protocolo:</span>{' '}
+						<span className="info-value">{order.protocolNumber}</span>
+					</p>
+					<p>
+						<span className="info-label">OBS:</span>{' '}
+						<span className="info-value">{order.observations}</span>
+					</p>
+				</div>
+
+				<div className="mt-3">
+					<p className="info-label">Kits</p>
+					<div className="kits">
 						{kits.length > 0 &&
-							kits?.map((kit) => (
+							kits.map((kit) => (
 								<KitCard
+									key={kit.id}
 									description={kit.description}
 									materials={kit.materials}
 									quantity={kit.quantity}
@@ -160,6 +151,6 @@ export default function InfoOrders() {
 					</div>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }

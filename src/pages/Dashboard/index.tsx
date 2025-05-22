@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 
 import './style.css';
 import CardOrder from '../../components/CardOrder/CardOrder.tsx';
@@ -26,6 +27,7 @@ export default function Dashboard() {
 			user: { name: string; picture: string };
 		}>
 	>([]);
+	const [isExpanded, setIsExpanded] = useState(false);
 	const apiKey = 'AIzaSyCLYeK1ksPfWhPxgZZ687Vdi-eDFLFRCr0';
 
 	// const [userName, setUserName] = useState('');
@@ -74,7 +76,7 @@ export default function Dashboard() {
 							<GoogleMap
 								mapContainerStyle={{
 									width: '100vw',
-									height: '50vh',
+									height: '80vh',
 									left: '-3vw',
 								}}
 								center={{
@@ -103,7 +105,22 @@ export default function Dashboard() {
 							</GoogleMap>
 						</LoadScript>
 					</div>
-					<div className="container-card">
+					<motion.div
+						className="container-card"
+						style={{ overflow: 'hidden', height: '60vh' }}
+						initial={{ y: '30vh' }} // Começa com 30vh escondidos para baixo
+						animate={{ y: isExpanded ? 0 : '30vh' }} // Sobe ou desce animado
+						transition={{ type: 'spring', stiffness: 200, damping: 30 }}
+						drag="y"
+						dragConstraints={{ top: 0, bottom: 0 }} // Se quiser limitar arrasto
+						onDragEnd={(event, info) => {
+							if (info.offset.y < -30) {
+								setIsExpanded(true);
+							} else if (info.offset.y > 30) {
+								setIsExpanded(false);
+							}
+						}}
+					>
 						<div className="col-12 mt-3 inside-scroll">
 							{orders.map((order) => (
 								<CardOrder
@@ -122,7 +139,7 @@ export default function Dashboard() {
 								/>
 							))}
 						</div>
-					</div>
+					</motion.div>
 				</div>
 			</div>
 		</>
