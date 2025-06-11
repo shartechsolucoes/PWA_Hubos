@@ -4,7 +4,6 @@ import { GoHome } from 'react-icons/go';
 import { CiCircleList, CiUser } from 'react-icons/ci';
 import './style.css';
 import { Link } from 'react-router';
-import LogoutModal from './LogoutModal/LogoutModal';
 
 export default function Navbar() {
 	return (
@@ -30,15 +29,14 @@ export default function Navbar() {
 							</div>
 						</div>
 						<div className="col-2 item text-center">
-							<Link to="/user/info">
+							<Link to="/protocols">
 								<CiUser />
 							</Link>
 						</div>
 						<div className="col-3 item text-center">
-							<LogoutModal />
-							{/* <Link to="/" onClick={() => localStorage.clear()}>
-								<IoIosLogOut />{' '}
-							</Link> */}
+							<Link to="/user/info">
+								<CiUser />
+							</Link>
 						</div>
 					</div>
 				</div>

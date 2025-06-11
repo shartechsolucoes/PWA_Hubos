@@ -11,6 +11,9 @@ import FormUser from './pages/User/Form/index.tsx';
 import InfoUser from './pages/User/Info';
 import PublicRoute from './routes/PublicRoute.tsx';
 import PrivateRoute from './routes/PrivateRoute.tsx';
+import Protocols from './pages/Protocols/Protocols.tsx';
+import ListProtocols from './pages/Protocols/List/index.tsx';
+import InfoProtocol from './pages/Protocols/Info/index.tsx';
 
 createRoot(document.getElementById('root')!).render(
 	<BrowserRouter>
@@ -71,6 +74,22 @@ createRoot(document.getElementById('root')!).render(
 				element={
 					<PrivateRoute>
 						<ReportOrders />
+					</PrivateRoute>
+				}
+			/>
+			<Route
+				path="protocols"
+				element={
+					<PrivateRoute>
+						<ListProtocols />
+					</PrivateRoute>
+				}
+			/>
+			<Route
+				path="protocol/info"
+				element={
+					<PrivateRoute>
+						<InfoProtocol />
 					</PrivateRoute>
 				}
 			/>

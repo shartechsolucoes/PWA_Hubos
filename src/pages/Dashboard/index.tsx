@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { motion, useMotionValue, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import './style.css';
 import CardOrder from '../../components/CardOrder/CardOrder.tsx';
@@ -113,7 +113,7 @@ export default function Dashboard() {
 						transition={{ type: 'spring', stiffness: 200, damping: 30 }}
 						drag="y"
 						dragConstraints={{ top: 0, bottom: 0 }} // Se quiser limitar arrasto
-						onDragEnd={(event, info) => {
+						onDragEnd={(_, info) => {
 							if (info.offset.y < -30) {
 								setIsExpanded(true);
 							} else if (info.offset.y > 30) {

@@ -4,6 +4,7 @@ import { IoPhonePortraitOutline } from 'react-icons/io5';
 import { CiMail } from 'react-icons/ci';
 import { useEffect, useState } from 'react';
 import { api } from '../../../utils/api.ts';
+import LogoutModal from './LogoutModal/LogoutModal.tsx';
 
 export default function InfoUser() {
 	const [user, setUser] = useState({
@@ -57,6 +58,9 @@ export default function InfoUser() {
 						<BsPinMap />
 						<p>{user.address + ' ' + user.neighborhood}</p>
 						<p>{user.city + ' ' + user.state}</p>
+					</div>
+					<div className="mt-3">
+						<LogoutModal />
 					</div>
 				</div>
 			</div>
