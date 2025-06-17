@@ -60,7 +60,7 @@ export default function InfoUser() {
 						<p>{user.city + ' ' + user.state}</p>
 					</div>
 					<div className="mt-3">
-						<LogoutModal />
+						Sair <LogoutModal />
 					</div>
 				</div>
 			</div>
