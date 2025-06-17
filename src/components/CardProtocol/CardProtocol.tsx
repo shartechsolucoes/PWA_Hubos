@@ -2,14 +2,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 import { BsQrCodeScan } from 'react-icons/bs';
 import { Link } from 'react-router';
+import { FaPlus } from 'react-icons/fa';
 
 export default function CardProtocol({
-	order,
+	protocol,
 	address,
 	id,
+	userId,
 }: {
-	order: string;
+	protocol: string;
 	address: string;
+	userId?: string;
 	id: number;
 }) {
 	return (
@@ -18,11 +21,11 @@ export default function CardProtocol({
 				<div className="cardOrder mt-2">
 					<div className="d-flex align-items-center kitItem gap-2">
 						<div className="qrcode">
-							<BsQrCodeScan />
+							{!userId ? <FaPlus /> : <BsQrCodeScan />}
 						</div>
 						<div className="info">
 							<p className="title">
-								<span>{order}</span>
+								<span>{protocol}</span>
 							</p>
 							<p>{address}</p>
 						</div>

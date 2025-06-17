@@ -1,9 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { IoMdAdd } from 'react-icons/io';
 import { GoHome } from 'react-icons/go';
-import { CiCircleList, CiUser } from 'react-icons/ci';
+import { CiCircleList, CiUser, CiViewList } from 'react-icons/ci';
 import './style.css';
 import { Link } from 'react-router';
+import { FaClipboardList } from 'react-icons/fa';
 
 export default function Navbar() {
 	return (
@@ -30,7 +31,7 @@ export default function Navbar() {
 						</div>
 						<div className="col-2 item text-center">
 							<Link to="/protocols">
-								<CiUser />
+								<CiViewList />
 							</Link>
 						</div>
 						<div className="col-3 item text-center">

@@ -2,155 +2,133 @@ import { BsQrCodeScan } from 'react-icons/bs';
 import './ordersInfo.css';
 import { api } from '../../../utils/api.ts';
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router';
-import { KitType, OrderType } from './types';
+import { useNavigate, useSearchParams } from 'react-router';
+import { KitType } from './types';
 import KitCard from '../../../components/KitCard/KitCard.tsx';
-import { format } from 'date-fns';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import Toast from '../../../components/Toast/Toast.tsx';
+import { FaPlus } from 'react-icons/fa';
 
 export default function InfoProtocol() {
 	const [searchParams] = useSearchParams();
 	const id = searchParams.get('id');
+	const navigate = useNavigate();
 
-	const [order, setOrder] = useState<OrderType>({
+	const [showToast, setShowToast] = useState(false);
+	const [toastMessage, setToastMessage] = useState('');
+	const [toastType, setToastType] = useState<'success' | 'error'>('success');
+	const [protocol, setOrder] = useState<{
+		id: number;
+		protocolNumber: string;
+		numberPost: number;
+		observation: string;
+		userId: string | null;
+		orderId: number;
+		address: string;
+		neighborhood: string;
+		city: string;
+		state: string;
+	}>({
 		id: 0,
 		address: '',
 		userId: '',
 		neighborhood: '',
 		city: '',
 		state: '',
-		status: 0,
-		observations: '',
-		lat: '',
-		long: '',
-		qr_code: 0,
+		observation: '',
 		protocolNumber: '',
-		active: false,
-		registerDay: new Date(),
-		duplicated: false,
-		photoStartWork: '',
-		photoEndWork: '',
-		ordersKits: [],
+		numberPost: 0,
+		orderId: 0,
 	});
 
-	const apiKey = 'AIzaSyCLYeK1ksPfWhPxgZZ687Vdi-eDFLFRCr0';
-
-	const [kits, setKits] = useState<KitType[]>([
-		{
-			id: 0,
-			description: '',
-			active: false,
-			status: false,
-			materials: [],
-			quantity: 0,
-		},
-	]);
-
 	const getOrder = async () => {
-		const response = await api.get(`/order/${id}`);
-		setOrder(response.data);
-	};
+		try {
+			const response = await api.get(`/services/${id}`);
+			console.log('API Response:', response.data);
 
-	const getKits = async () => {
-		const response = await api.get('kits');
-		const kits: KitType[] = [];
-
-		for (const kit of order.ordersKits) {
-			const matchedKit = response.data.find(
-				(item: KitType) => item.id === kit.kit_id
-			);
-
-			if (matchedKit) {
-				kits.push({
-					...matchedKit,
-					quantity: kit.quantity,
-				});
+			// Verifique se os dados existem antes de setar
+			if (response.data && response.data) {
+				setOrder(response.data);
+			} else {
+				console.warn('Dados de ordem não encontrados');
 			}
+		} catch (error) {
+			console.error('Erro ao buscar os dados do pedido:', error);
 		}
-
-		setKits(kits);
 	};
 
-	useEffect(() => {
-		if (order.id) {
-			getKits();
+	const attachToUser = async () => {
+		try {
+			await api.put(`services/${protocol.id}`, {
+				...protocol,
+				userId: localStorage.getItem('userId'),
+			});
+			handleSuccess();
+		} catch (error) {
+			console.log(error);
+			handleError();
 		}
-	}, [order]);
+	};
 
+	const handleSuccess = () => {
+		setToastMessage('Adicionado com sucesso!');
+		setToastType('success');
+		setShowToast(true);
+		closeToast();
+	};
+
+	const handleError = () => {
+		setToastMessage('Ocorreu um erro ao adicionar.');
+		setToastType('error');
+		setShowToast(true);
+		closeToast();
+	};
+
+	const closeToast = () => {
+		setTimeout(() => {
+			setShowToast(false);
+			if (toastType !== 'error') navigate('/protocols');
+		}, 1300);
+	};
 	useEffect(() => {
 		getOrder();
 	}, []);
+
 	return (
 		<div className="container">
 			<div className="card-container">
 				<div className="d-flex gap-3 align-items-center">
-					<div className="qrcode">
-						<BsQrCodeScan />
-					</div>
+					<div className="qrcode"></div>
 					<div>
-						<h4 className="mb-0">{order.qr_code}</h4>
-						<small>{format(order.registerDay, 'dd/MM/yyyy')}</small>
+						<h4 className="mb-0">Protocolo #{protocol.protocolNumber}</h4>
 					</div>
 				</div>
 
-				<div className="map mt-3">
-					<LoadScript googleMapsApiKey={apiKey}>
-						<GoogleMap
-							mapContainerStyle={{ width: '100%', height: '100%' }}
-							center={{
-								lat: parseFloat(order?.lat || '-15.7801'),
-								lng: parseFloat(order?.long || '-47.9292'),
-							}}
-							zoom={12}
-							options={{
-								disableDefaultUI: true,
-								zoomControl: false,
-								streetViewControl: false,
-								mapTypeControl: false,
-								fullscreenControl: false,
-							}}
-						>
-							<Marker
-								position={{
-									lat: parseFloat(order.lat),
-									lng: parseFloat(order.long),
-								}}
-								title={`Pedido #${order.id}`}
-							/>
-						</GoogleMap>
-					</LoadScript>
+				<div className="map-data mt-3">
+					{protocol.address} {protocol.neighborhood}, {protocol.city} -{' '}
+					{protocol.state}
 				</div>
 
-				<div className="map-data">
-					{order.address} {order.neighborhood}, {order.city} - {order.state}
-				</div>
+				<div className="map-data mt-3">Poste - {protocol.numberPost}</div>
 
 				<div className="mt-3">
 					<p>
 						<span className="info-label">Nº Protocolo:</span>{' '}
-						<span className="info-value">{order.protocolNumber}</span>
+						<span className="info-value">{protocol.protocolNumber}</span>
 					</p>
 					<p>
 						<span className="info-label">OBS:</span>{' '}
-						<span className="info-value">{order.observations}</span>
+						<span className="info-value">{protocol.observation}</span>
 					</p>
 				</div>
-
-				<div className="mt-3">
-					<p className="info-label">Kits</p>
-					<div className="kits">
-						{kits.length > 0 &&
-							kits.map((kit) => (
-								<KitCard
-									key={kit.id}
-									description={kit.description}
-									materials={kit.materials}
-									quantity={kit.quantity}
-								/>
-							))}
+				{!protocol.userId && (
+					<div>
+						<button type="button" onClick={() => attachToUser()}>
+							Adicionar
+						</button>
 					</div>
-				</div>
+				)}
 			</div>
+			<Toast type={toastType} message={toastMessage} show={showToast} />
 		</div>
 	);
 }

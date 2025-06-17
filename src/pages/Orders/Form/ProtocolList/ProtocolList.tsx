@@ -1,10 +1,17 @@
-import './styles.css';
-import CardProtocol from '../../../components/CardProtocol/CardProtocol.tsx';
 import { useEffect, useState } from 'react';
-import { api } from '../../../utils/api.ts';
-import { IoSearch } from 'react-icons/io5';
 
-export default function ListProtocols() {
+import { IoSearch } from 'react-icons/io5';
+import { api } from '../../../../utils/api';
+import { BsQrCodeScan } from 'react-icons/bs';
+
+import './styles.css';
+import { FaPlay } from 'react-icons/fa';
+
+export default function ProtocolList({
+	protocolNumber,
+}: {
+	protocolNumber: (e: string) => void;
+}) {
 	const [orders, setOrders] = useState<
 		Array<{
 			id: number;
@@ -34,13 +41,13 @@ export default function ListProtocols() {
 	const [page, setPage] = useState(0);
 	const [hasMore, setHasMore] = useState(true);
 	const [isLoading, setIsLoading] = useState(false);
-	const [userId, setUserId] = useState<string>('');
 
 	const getOrders = async (pageToLoad = 0, reset = false) => {
 		if (isLoading) return;
 		setIsLoading(true);
 
 		try {
+			const userId = localStorage.getItem('userId');
 			const response = await api.get(
 				`/services?page=${pageToLoad + 1}&userId=${userId}&search=${searchTerm}`
 			);
@@ -78,7 +85,7 @@ export default function ListProtocols() {
 		if (isReady) {
 			getOrders(0, true); // Carrega a primeira página ao iniciar
 		}
-	}, [isReady, userId]);
+	}, [isReady]);
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -94,9 +101,14 @@ export default function ListProtocols() {
 
 		window.addEventListener('scroll', handleScroll);
 		return () => window.removeEventListener('scroll', handleScroll);
-	}, [page, hasMore, isLoading, searchTerm]);
+	}, [page, hasMore, isLoading]);
+
+	useEffect(() => {
+		console.log(searchTerm);
+	}, [searchTerm]);
 
 	const handleSearch = () => {
+		console.log(searchTerm);
 		setOrders([]);
 		setPage(0);
 		setHasMore(true);
@@ -104,54 +116,56 @@ export default function ListProtocols() {
 	};
 
 	return (
-		<div className="container view">
-			{/* Search */}
-			<div className="d-flex align-content-end mb-3">
-				<input
-					placeholder="Pesquisar OS"
-					className="form-control search"
-					value={searchTerm}
-					onChange={(e) => setSearchTerm(e.target.value)}
-				/>
-				<button
-					className="btn search-button mx-2 d-flex justify-content-center align-items-center"
-					onClick={() => handleSearch()}
-				>
-					<IoSearch />
-				</button>
+		<>
+			<div className=" view">
+				<div className="d-flex align-content-end">
+					<input
+						placeholder="Pesquisar Protocolo"
+						className="form-control search"
+						value={searchTerm}
+						onChange={(e) => {
+							console.log('Digitando:', e.target.value);
+							setSearchTerm(e.target.value);
+						}}
+					/>
+					<button
+						type="button"
+						className="btn search-button mx-2 my-0 d-flex justify-content-center align-items-center"
+						onClick={handleSearch}
+					>
+						<IoSearch />
+					</button>
+				</div>
+
+				{orders.map((order) => (
+					<a
+						key={order.id}
+						className="link-no-style"
+						onClick={() => protocolNumber(order.protocolNumber)}
+					>
+						<div className="cardOrder mt-2">
+							<div className="d-flex align-items-center kitItem gap-2">
+								<div className="qrcode">
+									<FaPlay />
+								</div>
+								<div className="info">
+									<p className="title">
+										<span>{order.protocolNumber}</span>
+									</p>
+									<p>{`${order.address} ${order.neighborhood} ${order.city} ${order.state}`}</p>
+								</div>
+							</div>
+						</div>
+					</a>
+				))}
+
+				{isLoading && <p className="text-center mt-3">Carregando...</p>}
+				{!hasMore && (
+					<p className="text-center mt-3">
+						Nenhuma ordem adicional encontrada.
+					</p>
+				)}
 			</div>
-
-			{/* Tabs */}
-			<div className="mb-3 tabs">
-				<button
-					className={`tab-btn ${!userId ? 'active' : ''}`}
-					onClick={() => setUserId('')}
-				>
-					Todos
-				</button>
-				<button
-					className={`tab-btn ${userId ? 'active' : ''}`}
-					onClick={() => setUserId(localStorage.getItem('userId') ?? '')}
-				>
-					Meus
-				</button>
-			</div>
-
-			{/* Lista */}
-			{orders.map((order) => (
-				<CardProtocol
-					userId={order.userId ?? ''}
-					key={order.id}
-					id={order.id}
-					address={`${order.address} ${order.neighborhood} ${order.city} ${order.state}`}
-					protocol={order.protocolNumber}
-				/>
-			))}
-
-			{isLoading && <p className="text-center mt-3">Carregando...</p>}
-			{!hasMore && (
-				<p className="text-center mt-3">Nenhuma ordem adicional encontrada.</p>
-			)}
-		</div>
+		</>
 	);
 }

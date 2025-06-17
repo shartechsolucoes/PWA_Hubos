@@ -5,6 +5,7 @@ import QRCodeScanner from './QrCodeScanner/QRCodeScanner.tsx';
 import AddressForm from './AddressForm/AddressForm.tsx';
 import KitSelector from './KitSelector/KitSelector.tsx';
 import CameraCapture from './CameraCapture/CameraCapture.tsx';
+import ProtocolList from './ProtocolList/ProtocolList.tsx';
 
 import { KitType } from '../Info/types';
 import { api } from '../../../utils/api.ts';
@@ -15,6 +16,7 @@ import { useSkipPhotoSteps } from '../../../utils/useSkipPhotoSteps.ts';
 import Resume from './Resume/Resume.tsx';
 
 const createSteps = (isOnline: boolean) => [
+	{ id: 'PROTOCOL', title: 'Protocolos' },
 	{ id: 'QRCODE', title: 'QR Code' },
 	{ id: 'INFO', title: 'Informações' },
 	{ id: 'KITS', title: 'Selecione o kit usado' },
@@ -174,6 +176,28 @@ export default function FormOrders() {
 				<form className="steps-form" onSubmit={handleSubmit}>
 					<div className="fields-container">
 						<p>{steps[currentStep].title}</p>
+						{steps[currentStep].id === 'PROTOCOL' && (
+							<>
+								<div className="d-flex flex-row-reverse ">
+									<button
+										type="button"
+										className="mt-3 button-next"
+										onClick={handleNext}
+									>
+										Próximo
+									</button>
+								</div>
+								<ProtocolList
+									protocolNumber={(value) => {
+										setFormData((prev: any) => ({
+											...prev,
+											protocolNumber: value,
+										}));
+										handleNext();
+									}}
+								/>
+							</>
+						)}
 
 						{steps[currentStep].id === 'QRCODE' && (
 							<QRCodeScanner
