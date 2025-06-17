@@ -20,7 +20,7 @@ export default function LogoutModal() {
 				onClick={() => setShowModal(true)}
 				style={{ background: 'none', border: 'none' }}
 			>
-				<IoIosLogOut />
+				Sair <IoIosLogOut />
 			</a>
 
 			{showModal && (
